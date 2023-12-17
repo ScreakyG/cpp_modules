@@ -8,11 +8,13 @@ class Contact
 	public:
 		Contact(void);
 		~Contact(void);
+		bool	fillContact(void);
+
 	private:
-		std::string FirstName;
-		std::string LastName;
-		std::string Nickname;
-		std::string	PhoneNumber;
+		std::string _FirstName;
+		std::string _LastName;
+		std::string _Nickname;
+		std::string	_PhoneNumber;
 };
 
 #endif
