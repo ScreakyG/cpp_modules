@@ -12,11 +12,28 @@ Contact::~Contact(void)
 	return ;
 }
 
+bool Contact::fill_infos(std::string msg)
+{
+	std::string input;
+
+	std::cout << msg << " : ";
+	if (!(getline(std::cin, input)))
+	{
+		std::cout << "Exiting" << std::endl;
+		return (false);
+	}
+	if (input.empty())
+	{
+		if (fill_infos(msg) == false)
+			return (false);
+	}
+	return (true);
+
+}
+
 bool Contact::fillContact(void)
 {
-	_FirstName = "fgonzale";
-	_LastName = "Gonzalez";
-	std::cout << "FirstName = " << _FirstName << std::endl;
-	std::cout << "LastName = " << _LastName << std::endl;
+	if (fill_infos("First Name") == false)
+		return (false);
 	return (true);
 }

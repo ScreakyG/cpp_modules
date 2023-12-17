@@ -12,7 +12,9 @@ PhoneBook::~PhoneBook(void)
 	return ;
 }
 
-void PhoneBook::addContact(void)
+bool PhoneBook::addContact(void)
 {
-	_contact_tab.fillContact();
+	if (_contact_tab.fillContact() == false)
+		return (false);
+	return (true);
 }

@@ -15,6 +15,7 @@ class Contact
 		std::string _LastName;
 		std::string _Nickname;
 		std::string	_PhoneNumber;
+		bool	fill_infos(std::string msg);
 };
 
 #endif

@@ -9,7 +9,7 @@ class PhoneBook
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
-		void	addContact(void);
+		bool	addContact(void);
 
 	private:
 		Contact	_contact_tab;

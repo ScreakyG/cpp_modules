@@ -6,16 +6,14 @@ int	main(void)
 	PhoneBook repertoire;
 	std::string input;
 
-	while (1)
+	while (std::cout << "PhoneBook : " && std::getline(std::cin, input))
 	{
-		std::cout << "PhoneBook : ";
-		std::cin >> input;
 		if (input == "EXIT")
 			break ;
 		else if (input == "ADD")
 		{
-			std::cout << "Print ADD menu" << std::endl;
-			repertoire.addContact();
+			if (repertoire.addContact() == false)
+				break ;
 		}
 		else if (input == "SEARCH")
 			std::cout << "Print SEARCH menu" << std::endl;
