@@ -16,7 +16,7 @@ int	main(void)
 				break ;
 		}
 		else if (input == "SEARCH")
-			std::cout << "Print SEARCH menu" << std::endl;
+			repertoire.printSearch();
 		else
 			std::cout << "Command not found , use only ADD, SEARCH or EXIT" << std::endl;
 	}

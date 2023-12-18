@@ -12,7 +12,7 @@ Contact::~Contact(void)
 	return ;
 }
 
-bool Contact::fill_infos(std::string msg)
+bool Contact::fill_infos(std::string msg, std::string *variable)
 {
 	std::string input;
 
@@ -24,16 +24,32 @@ bool Contact::fill_infos(std::string msg)
 	}
 	if (input.empty())
 	{
-		if (fill_infos(msg) == false)
+		if (fill_infos(msg, variable) == false)
 			return (false);
 	}
+	else
+		*variable = input;
 	return (true);
 
 }
 
 bool Contact::fillContact(void)
 {
-	if (fill_infos("First Name") == false)
+	if (fill_infos("First Name", &_FirstName) == false)
 		return (false);
+	if (fill_infos("Last Name", &_LastName) == false)
+		return (false);
+	if (fill_infos("Nickame", &_Nickname) == false)
+		return (false);
+	if (fill_infos("PhoneNumber", &_PhoneNumber) == false)
+		return (false);
+	if (fill_infos("Your darkest secret", &_Secret) == false)
+		return (false);
+	std::cout << "CONTACT ADDED" << std::endl;
 	return (true);
+}
+
+std::string Contact::getFirstName(void)
+{
+	return (this->_FirstName);
 }

@@ -9,13 +9,15 @@ class Contact
 		Contact(void);
 		~Contact(void);
 		bool	fillContact(void);
+		std::string getFirstName(void);
 
 	private:
 		std::string _FirstName;
 		std::string _LastName;
 		std::string _Nickname;
 		std::string	_PhoneNumber;
-		bool	fill_infos(std::string msg);
+		std::string _Secret;
+		bool	fill_infos(std::string msg, std::string *variable);
 };
 
 #endif
