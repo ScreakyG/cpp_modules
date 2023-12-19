@@ -53,3 +53,22 @@ std::string Contact::getFirstName(void)
 {
 	return (this->_FirstName);
 }
+
+std::string Contact::getLastName(void)
+{
+	return (this->_LastName);
+}
+
+std::string Contact::getNickname(void)
+{
+	return (this->_Nickname);
+}
+
+void Contact::printInfos(void)
+{
+	std::cout << "First Name : " << _FirstName << std::endl;
+	std::cout << "Last Name : " << _LastName << std::endl;
+	std::cout << "Nickname : " << _Nickname << std::endl;
+	std::cout << "PhoneNumber : " << _PhoneNumber << std::endl;
+	std::cout << "Darkest Secret : " << _Secret << std::endl;
+}

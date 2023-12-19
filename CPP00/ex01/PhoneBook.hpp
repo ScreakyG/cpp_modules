@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include "Contact.hpp"
 
 class PhoneBook
@@ -14,10 +15,11 @@ class PhoneBook
 		bool	printSearch(void);
 
 	private:
-		Contact	_contact_tab;
+		Contact	_contact_tab[8];
 		int		_nbContact;
 		void	_printHeader();
 		void	_printBookContacts(std::string str, bool seperator);
+		bool	_printIndexPrompt(void);
 };
 
 #endif
