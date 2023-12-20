@@ -20,6 +20,7 @@ class PhoneBook
 		void	_printHeader();
 		void	_printBookContacts(std::string str, bool seperator);
 		bool	_printIndexPrompt(void);
+		bool	_verifyIndex(const std::string& str);
 };
 
 #endif

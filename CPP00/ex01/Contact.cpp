@@ -45,7 +45,7 @@ bool Contact::fillContact(void)
 		return (false);
 	if (fill_infos("Your darkest secret", &_Secret) == false)
 		return (false);
-	std::cout << "CONTACT ADDED" << std::endl;
+	std::cout << GREEN << "CONTACT ADDED" << RESET << std::endl;
 	return (true);
 }
 

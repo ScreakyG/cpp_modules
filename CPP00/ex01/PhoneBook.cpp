@@ -15,7 +15,7 @@ PhoneBook::~PhoneBook(void)
 
 bool PhoneBook::addContact(void)
 {
-	if (_contact_tab[_nbContact % 8].fillContact() == false) //Si j'ajoute un 9eme contact je lecris dans lemplacement 0.
+	if (_contact_tab[_nbContact % 8].fillContact() == false)
 		return (false);
 	_nbContact++;
 	return (true);
@@ -37,7 +37,8 @@ void	PhoneBook::_printBookContacts(std::string str, bool separator)
 {
 	if (str.size() > 10)
 	{
-		std::cout << "Trimmed."; // Faire un substr de str et trim.
+		std::cout << str.substr(0, 9);
+		std::cout << ".";
 	}
 	else
 		std::cout << std::setw(10) << std::setfill(' ') << str;
@@ -74,21 +75,36 @@ bool PhoneBook::printSearch(void)
 	return (true);
 }
 
+bool PhoneBook::_verifyIndex(const std::string& str)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < str.size())
+	{
+		if (std::isdigit(str[i]) == 0)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool PhoneBook::_printIndexPrompt(void)
 {
 	int			index;
 	std::string index_ascii;
 
 	std::cout << "Enter contact index : ";
-	if (!(getline(std::cin, index_ascii)))
+	if (!(getline(std::cin, index_ascii))) // Gerer CTRL+D lorsque jecris dedans.
 		return (false);
-	// Gerer si index_ascii est empty et si i < 0 ou > nb_contact;
 	index = std::atoi(index_ascii.c_str());
-	if (index_ascii.empty() || index < 0 || index >= _nbContact)
+	if (index_ascii.empty() || _verifyIndex(index_ascii) == false || index < 0 || index >= 8 || index >= _nbContact)
 	{
+		std::cout << "Invalid index" << std::endl;
 		if (_printIndexPrompt() == false)
 			return (false);
 	}
-	_contact_tab[index].printInfos();
+	else
+		_contact_tab[index % 8].printInfos(); //Modulo pas necessaire.
 	return (true);
 }
