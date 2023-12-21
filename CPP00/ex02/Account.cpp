@@ -1,5 +1,6 @@
 #include "Account.hpp"
 #include <iostream>
+#include <ctime>
 
 int	Account::_nbAccounts = 0;
 int	Account:: _totalAmount = 0;
@@ -28,6 +29,7 @@ int Account::getNbWithdrawals(void)
 
 Account::Account(int initial_deposit) : _amount(initial_deposit), _nbDeposits(0), _nbWithdrawals(0)
 {
+	_displayTimestamp();
 	_accountIndex = _nbAccounts;
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";amount:" << _amount; 
@@ -39,6 +41,7 @@ Account::Account(int initial_deposit) : _amount(initial_deposit), _nbDeposits(0)
 
 Account::~Account(void)
 {
+	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";amount:" << _amount;
 	std::cout << ";closed";
@@ -47,6 +50,7 @@ Account::~Account(void)
 
 void Account::displayAccountsInfos(void)
 {
+	_displayTimestamp();
 	std::cout << "accounts:" << getNbAccounts();
 	std::cout << ";total:" << getTotalAmount();
 	std::cout << ";deposits:" << getNbDeposits();
@@ -56,6 +60,7 @@ void Account::displayAccountsInfos(void)
 
 void Account::displayStatus(void) const
 {
+	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";amount:" << _amount;
 	std::cout << ";deposits:" << _nbDeposits;
@@ -65,6 +70,7 @@ void Account::displayStatus(void) const
 
 void Account::makeDeposit(int deposit)
 {
+	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";p_amount:" << _amount;
 	std::cout << ";deposit:" << deposit;
@@ -79,6 +85,7 @@ void Account::makeDeposit(int deposit)
 
 bool Account::makeWithdrawal(int withdrawal)
 {
+	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";p_amount:" << _amount;	
 	if (withdrawal > checkAmount())
@@ -103,7 +110,18 @@ int Account::checkAmount(void) const
 	return (this->_amount);
 }
 
-// void Account::_displayTimestamp(void)
-// {
+void Account::_displayTimestamp(void)
+{
+	std::time_t current_time = std::time(NULL);
+	std::tm* localTime = std::localtime(&current_time);
+	std::cout << "[";
+	std::cout << localTime->tm_year + 1900;
+	std::cout << localTime->tm_mon + 1;
+	std::cout << localTime->tm_mday;
+	std::cout << "_";
+	std::cout << localTime->tm_hour;
+	std::cout << localTime->tm_min;
+	std::cout << localTime->tm_sec;
+	std::cout << "] ";
 
-// }
+}
