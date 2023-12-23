@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 23:11:57 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/23 23:12:00 by fgonzale         ###   ########.fr       */
+/*   Created: 2023/12/23 23:13:27 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:13:29 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_H
-# define PHONEBOOK_CLASS_H
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
-#include <iostream>
-#include <iomanip>
 #include <string>
-#include "Contact.hpp"
+#include <iostream>
 
-class PhoneBook
+
+
+class Zombie
 {
 	public:
-		PhoneBook(void);
-		~PhoneBook(void);
-		bool	addContact(void);
-		bool	printSearch(void);
-
+		Zombie(std::string name_init);
+		Zombie(void);
+		~Zombie(void);
+		void announce(void);
+		void setName(std::string name);
 	private:
-		Contact	_contact_tab[8];
-		int		_nbContact;
-		void	_printHeader() const;
-		void	_printBookContacts(std::string str, bool seperator) const;
-		bool	_printIndexPrompt(void) const;
-		bool	_verifyIndex(const std::string& str) const;
+		std::string _name;
 };
+
+Zombie	*zombieHorde(int N, std::string name);
 
 #endif

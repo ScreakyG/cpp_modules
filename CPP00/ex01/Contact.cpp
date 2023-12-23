@@ -1,15 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/23 23:10:37 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:10:39 by fgonzale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
 
 Contact::Contact(void)
 {
-	std::cout << "Contact Constructor called" << std::endl;
-	return ;
+
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact Deconstructor called" << std::endl;
-	return ;
+
 }
 
 bool Contact::fill_infos(std::string msg, std::string *variable)
@@ -64,7 +74,7 @@ std::string Contact::getNickname(void)
 	return (this->_Nickname);
 }
 
-void Contact::printInfos(void)
+void Contact::printInfos(void) const
 {
 	std::cout << "First Name : " << _FirstName << std::endl;
 	std::cout << "Last Name : " << _LastName << std::endl;

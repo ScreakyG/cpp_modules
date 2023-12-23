@@ -1,16 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/23 23:11:51 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:11:53 by fgonzale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
 #include <cstdlib>
 
 PhoneBook::PhoneBook(void) : _nbContact(0)
 {
-	std::cout << "PhoneBook Constructor called" << std::endl;
-	return ;
+
 }
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "PhoneBook Deconstructor called" << std::endl;
-	return ;
+
 }
 
 bool PhoneBook::addContact(void)
@@ -21,7 +31,7 @@ bool PhoneBook::addContact(void)
 	return (true);
 }
 
-void PhoneBook::_printHeader(void)
+void PhoneBook::_printHeader(void) const
 {
 	std::cout << std::setw(10) << std::setfill(' ') << "INDEX";
 	std::cout << "|";
@@ -33,7 +43,7 @@ void PhoneBook::_printHeader(void)
 	std::cout << "----------|----------|----------|----------" << std::endl;
 }
 
-void	PhoneBook::_printBookContacts(std::string str, bool separator)
+void	PhoneBook::_printBookContacts(std::string str, bool separator) const
 {
 	if (str.size() > 10)
 	{
@@ -75,7 +85,7 @@ bool PhoneBook::printSearch(void)
 	return (true);
 }
 
-bool PhoneBook::_verifyIndex(const std::string& str)
+bool PhoneBook::_verifyIndex(const std::string& str) const
 {
 	size_t	i;
 
@@ -89,7 +99,7 @@ bool PhoneBook::_verifyIndex(const std::string& str)
 	return (true);
 }
 
-bool PhoneBook::_printIndexPrompt(void)
+bool PhoneBook::_printIndexPrompt(void) const
 {
 	int			index;
 	std::string index_ascii;

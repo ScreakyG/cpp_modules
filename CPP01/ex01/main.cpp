@@ -5,35 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 23:11:38 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/23 23:11:40 by fgonzale         ###   ########.fr       */
+/*   Created: 2023/12/23 23:13:16 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:13:18 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
-#include "PhoneBook.hpp"
+#include "Zombie.hpp"
 
-int	main(void)
+
+int main(void)
 {
-	PhoneBook repertoire;
-	std::string input;
-
-	while (std::cout << "PhoneBook : " && std::getline(std::cin, input))
+	int	i = 0;
+	int	nb = 5;
+	Zombie	*horde = zombieHorde(nb, "Hordeux");
+	while (i < nb)
 	{
-		if (input == "EXIT")
-			break ;
-		else if (input == "ADD")
-		{
-			if (repertoire.addContact() == false)
-				break ;
-		}
-		else if (input == "SEARCH")
-		{
-			if (repertoire.printSearch() == false)
-				break ;
-		}
-		else
-			std::cout << "Command not found , use only ADD, SEARCH or EXIT" << std::endl;
+		horde[i].announce();
+		i++;
 	}
-	return (0);
+	delete [] horde;
 }

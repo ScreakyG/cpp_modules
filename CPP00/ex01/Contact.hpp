@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/23 23:10:53 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:10:56 by fgonzale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONTACT_CLASS_H
 # define CONTACT_CLASS_H
 
@@ -12,7 +24,7 @@ class Contact
 		Contact(void);
 		~Contact(void);
 		bool		fillContact(void);
-		void		printInfos(void);
+		void		printInfos(void) const;
 		std::string getFirstName(void);
 		std::string getLastName(void);
 		std::string getNickname(void);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/23 23:10:22 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/23 23:10:25 by fgonzale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream> // Library qui permet les fonctions d'affichage , recuperer input utilisateurs etc..
 
 //using namespace std; // Sorte de dossier regroupand des fonctions, variables etc .. std correspond a la bibliotheque standard.
