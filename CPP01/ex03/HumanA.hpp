@@ -6,14 +6,14 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 19:20:50 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/24 20:16:37 by fgonzale         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:24:29 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUMAN_A_HPP
 # define HUMAN_A_HPP
 
-#include "Weapon.hpp"
+# include "Weapon.hpp"
 
 class HumanA
 {

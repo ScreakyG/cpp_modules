@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 20:03:09 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/28 17:24:22 by fgonzale         ###   ########.fr       */
+/*   Created: 2023/12/28 17:28:28 by fgonzale          #+#    #+#             */
+/*   Updated: 2023/12/28 20:52:54 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMAN_B_HPP
-# define HUMAN_B_HPP
+#include "Harl.hpp"
 
-# include "Weapon.hpp"
-
-class HumanB
+int main(void)
 {
-	public:
-		HumanB(std::string name);
-		void setWeapon(Weapon& weapon);
-		void attack(void) const;
-	private:
-		std::string _humanName;
-		Weapon*		_arme;
-};
-
-#endif
+	Harl test;
+	test.complain("debug");
+	test.complain("info");
+	test.complain("warning");
+	test.complain("error");
+	test.complain("other");
+	return (0);
+}

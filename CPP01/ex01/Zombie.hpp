@@ -6,15 +6,15 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 23:13:27 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/23 23:13:29 by fgonzale         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:24:38 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
 
-#include <string>
-#include <iostream>
+# include <string>
+# include <iostream>
 
 
 

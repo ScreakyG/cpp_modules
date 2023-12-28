@@ -6,15 +6,15 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:54:59 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/24 20:16:12 by fgonzale         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:24:17 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WEAPON_H
 # define WEAPON_H
 
-#include <string>
-#include <iostream>
+# include <string>
+# include <iostream>
 
 class Weapon
 {
