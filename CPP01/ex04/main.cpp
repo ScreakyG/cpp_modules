@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:29:09 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/28 15:05:20 by fgonzale         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:08:59 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	if (argc != 4)
 	{
 		std::cerr << "Please use like this : ./a.out <filename> <s1> <s2>." << std::endl;
-		return (0);
+		return (1);
 	}
 	std::string filename = argv[1];
 	std::string s1 = argv[2];
