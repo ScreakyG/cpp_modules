@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:11:12 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/16 20:26:30 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:33:19 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,8 @@ int main(void)
 
 	std::cout << "Max " << "[" << a << ", " << b << "] : " << Fixed::max(a, b) << std::endl;
 	std::cout << "Min " << "[" << a << ", " << b << "] : " << Fixed::min(a, b) << std::endl;
+
+	std::cout << "------------------------------------------------" << std::endl;
+
+	std::cout << "dummy = Fixed(1000) : " << (dummy = Fixed(1000)) << std::endl;
 }
