@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:36:12 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/20 08:04:37 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/01/20 07:07:25 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 ClapTrap::ClapTrap(void) : _name("Bot"), _vie(10), _energy(10), _attackDamage(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default ClapTrap constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _vie(10), _energy(10), _attackDamage(0)
@@ -34,7 +34,7 @@ ClapTrap::ClapTrap(ClapTrap const & src)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Deconstructor called" << std::endl;
+	std::cout << "ClapTrap deconstructor called" << std::endl;
 }
 
 /******************************************************************************/
@@ -58,12 +58,12 @@ ClapTrap& ClapTrap::operator=(ClapTrap const &src)
 /*						FUNCTIONS							  				  */
 /******************************************************************************/
 
-void ClapTrap::attack(const std::string &target)
+void ClapTrap::attack(const std::string &name)
 {
 	if (this->_vie > 0 && this->_energy > 0)
 	{
 		this->_energy -= 1;
-		std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << this->_name << " attacks " << name << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 	}
 	else if (this->_vie <= 0)
 		std::cout << "ClapTrap " << this->_name << " is dead and cannot attack." << std::endl;
