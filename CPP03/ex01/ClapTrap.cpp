@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:36:12 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/20 07:07:25 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/01/20 08:32:55 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->_vie > 0)
 	{
-		std::cout << "ClapTrap " << this->_name << " takes " << amount << " damage." << std::endl;
+		std::cout << this->_name << " takes " << amount << " damages." << std::endl;
 		this->_vie -= amount;
 	}
 	else
-		std::cout << "ClapTrap " << this->_name << " is already dead." << std::endl;
+		std::cout << this->_name << " is already dead." << std::endl;
+	if (this->_vie <= 0)
+		std::cout << this->_name << " is dead." << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
