@@ -6,11 +6,15 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 06:35:02 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/20 08:05:54 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/01/20 08:38:10 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+
+/******************************************************************************/
+/*						CONSTRUCTORS & DESTRUCTORS							  */
+/******************************************************************************/
 
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
@@ -40,6 +44,10 @@ ScavTrap::~ScavTrap(void)
 	std::cout << "ScavTrap deconstructor called" << std::endl;
 }
 
+/******************************************************************************/
+/*						OPERATORS							  				  */
+/******************************************************************************/
+
 ScavTrap& ScavTrap::operator=(const ScavTrap& src)
 {
 	std::cout << "ScavTrap copy assignement operator called " << std::endl;
@@ -49,6 +57,10 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& src)
 	}
 	return (*this);
 }
+
+/******************************************************************************/
+/*						FUNCTIONS							  				  */
+/******************************************************************************/
 
 void ScavTrap::guardGate(void)
 {
