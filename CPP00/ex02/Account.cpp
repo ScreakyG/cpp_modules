@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 23:12:10 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/23 23:12:11 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:50:09 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ Account::Account(int initial_deposit) : _amount(initial_deposit), _nbDeposits(0)
 	_displayTimestamp();
 	_accountIndex = _nbAccounts;
 	std::cout << "index:" << _accountIndex;
-	std::cout << ";amount:" << _amount; 
+	std::cout << ";amount:" << _amount;
 	std::cout << ";created";
 	std::cout << std::endl;
 	_nbAccounts++;
@@ -99,7 +99,7 @@ bool Account::makeWithdrawal(int withdrawal)
 {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
-	std::cout << ";p_amount:" << _amount;	
+	std::cout << ";p_amount:" << _amount;
 	if (withdrawal > checkAmount())
 	{
 		std::cout << ";withdrawal: refused";
@@ -117,7 +117,7 @@ bool Account::makeWithdrawal(int withdrawal)
 	return (true);
 }
 
-int Account::checkAmount(void) const 
+int Account::checkAmount(void) const
 {
 	return (this->_amount);
 }
@@ -128,11 +128,21 @@ void Account::_displayTimestamp(void)
 	std::tm* localTime = std::localtime(&current_time);
 	std::cout << "[";
 	std::cout << localTime->tm_year + 1900;
+	if (localTime->tm_mon < 10)
+		std::cout << "0";
 	std::cout << localTime->tm_mon + 1;
+	if (localTime->tm_mday < 10)
+		std::cout << "0";
 	std::cout << localTime->tm_mday;
 	std::cout << "_";
+	if (localTime->tm_hour < 10)
+		std::cout << "0";
 	std::cout << localTime->tm_hour;
+	if (localTime->tm_min < 10)
+		std::cout << "0";
 	std::cout << localTime->tm_min;
+	if (localTime->tm_sec < 10)
+		std::cout << "0";
 	std::cout << localTime->tm_sec;
 	std::cout << "] ";
 

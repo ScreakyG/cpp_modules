@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:35:19 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/23 03:49:04 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/01/23 04:38:09 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int main(void)
 {
-	DiamondTrap test;
+	DiamondTrap test("Joe");
 	//test.whoAmI();
-	test.printStatus();
-	//test.attack("Billy");
+	//test.printStatus();
+	test.attack("Billy");
 }
