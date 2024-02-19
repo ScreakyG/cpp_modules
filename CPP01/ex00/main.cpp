@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 23:12:39 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/23 23:12:41 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:59:07 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,19 @@
 int main(void)
 {
 	Zombie foo("Foo");
-	randomChump("Random");
-	Zombie	*Malloced = newZombie("Malloced");
-	std::cout << "Debug" << std::endl;
-	delete Malloced;
+	foo.announce();
+
+	std::cout << "<--------------------------------------------->" << std::endl;
+
+	randomChump("Default");
+
+	std::cout << "<--------------------------------------------->" << std::endl;
+
+	Zombie	*malloced = newZombie("Malloced");
+	malloced->announce();
+
+	std::cout << "<--------------------------------------------->" << std::endl;
+	randomChump("Default2");
+
+	delete malloced;
 }
