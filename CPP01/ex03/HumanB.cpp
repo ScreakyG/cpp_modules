@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:07:11 by fgonzale          #+#    #+#             */
-/*   Updated: 2023/12/24 20:26:05 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:21:08 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 HumanB::HumanB(std::string name) : _humanName(name), _arme(NULL)
 {
-	
+
 }
 
 void HumanB::attack(void) const
@@ -24,7 +24,7 @@ void HumanB::attack(void) const
 		std::cout << _humanName << " attacks with their " << _arme->getType() << std::endl;
 	}
 	else
-		std::cout << _humanName << " : have no weapon to attack" << std::endl;
+		std::cout << _humanName << " : have no weapon to attack so he use his hands" << std::endl;
 }
 
 void HumanB::setWeapon(Weapon& weapon)
