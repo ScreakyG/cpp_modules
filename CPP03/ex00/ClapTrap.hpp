@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:35:32 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/18 22:26:23 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:10:30 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ class ClapTrap
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 
-		void getHealth(void) const;
+		int getHealth(void) const;
+		int getEnergyPoints(void) const;
 
 	private:
 		std::string _name;
-		int _vie;
+		int _hitPoints;
 		int _energy;
 		int _attackDamage;
 };

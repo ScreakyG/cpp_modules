@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:35:32 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/20 07:15:30 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:41:36 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class ClapTrap
 
 	protected:
 		std::string _name;
-		int _vie;
+		int _hitPoints;
 		int _energy;
 		int _attackDamage;
 };

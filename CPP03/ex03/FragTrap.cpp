@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:12:02 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/01/23 03:24:43 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:13:39 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ FragTrap::FragTrap(void) : ClapTrap()
 {
 	std::cout << "Default FragTrap constructor called" << std::endl;
 	this->_name = "DefaultFrag";
-	this->_vie = 100;
+	this->_hitPoints = 100;
 	this->_energy = 100;
 	this->_attackDamage = 30;
 }
@@ -28,7 +28,7 @@ FragTrap::FragTrap(void) : ClapTrap()
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "Name FragTrap constructor called" << std::endl;
-	_vie = 100;
+	_hitPoints = 100;
 	_energy = 100;
 	_attackDamage = 30;
 }
@@ -64,7 +64,7 @@ FragTrap& FragTrap::operator=(const FragTrap& src)
 
 void FragTrap::highFiveGuys(void)
 {
-	if (this->_vie > 0)
+	if (this->_hitPoints > 0)
 		std::cout << this->_name << " asked for a high fives." << std::endl;
 }
 
@@ -80,6 +80,6 @@ void FragTrap::setDefaultEP(void)
 
 void FragTrap::setDefaultHP(void)
 {
-	this->_vie = 100;
+	this->_hitPoints = 100;
 }
 
