@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:13:37 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 14:47:52 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:46:55 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Dog : public Animal
 		~Dog(void);
 		Dog& operator=(const Dog& src);
 
-		virtual void makeSound(void) const;
+		void makeSound(void) const;
 };
 
 #endif
