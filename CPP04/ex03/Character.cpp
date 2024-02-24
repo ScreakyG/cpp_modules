@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:49:53 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 18:39:58 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:00:15 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,12 @@ void Character::equip(AMateria* m)
 	}
 	for (idx = 0; idx < 4; idx++)
 	{
-		if (_inventory[idx] == NULL)
+		if (_inventory[idx] == m)
+		{
+			std::cout << this->_name <<" : You already have this item at slot" << idx << std::endl;
+			return ;
+		}
+		else if (_inventory[idx] == NULL)
 		{
 			_inventory[idx] = m;
 			std::cout << this->_name << " : AMateria " << m->getType() << " added to inventory at slot " << idx << std::endl;
