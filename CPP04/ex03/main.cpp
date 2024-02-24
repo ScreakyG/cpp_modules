@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:24:07 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 22:00:52 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:10:05 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ int main()
 
 	ICharacter* me = new Character("me");
 	AMateria* tmp = src->createMateria("ice");
-	AMateria* tmp2 = src->createMateria("ice");
 
 	me->equip(tmp);
-	me->equip(tmp2);
+	me->equip(tmp);
 
 	delete me;
 	delete src;

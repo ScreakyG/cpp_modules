@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:49:53 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 22:00:15 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:10:46 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void Character::equip(AMateria* m)
 	{
 		if (_inventory[idx] == m)
 		{
-			std::cout << this->_name <<" : You already have this item at slot" << idx << std::endl;
+			std::cout << this->_name <<" : You already have this materia at slot " << idx << std::endl;
 			return ;
 		}
 		else if (_inventory[idx] == NULL)
