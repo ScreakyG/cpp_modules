@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:13:39 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 16:53:40 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 23:43:18 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 
 Cure::Cure(void) : AMateria("cure")
 {
-	std::cout << "Cure default constructor called" << std::endl;
+	std::cout << YELLOW "Cure default constructor called" RESET << std::endl;
 }
 
 Cure::Cure(const Cure& src) : AMateria()
 {
-	std::cout << "Cure copy constructor called" << std::endl;
+	std::cout << YELLOW "Cure copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 Cure::~Cure(void)
 {
-	std::cout << "Cure deconstructor called" << std::endl;
+	std::cout << RED "Cure deconstructor called" RESET << std::endl;
 }
 
 /******************************************************************************/
@@ -38,7 +38,7 @@ Cure::~Cure(void)
 
 Cure& Cure::operator=(const Cure& src)
 {
-	std::cout << "Cure copy assignement called" << std::endl;
+	std::cout << YELLOW "Cure copy assignement called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_type = src._type;

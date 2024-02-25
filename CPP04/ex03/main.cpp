@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:24:07 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/25 23:14:17 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:07:00 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void materiaSourceTests()
 {
-	std::cout << "####### MATERIASOURCE TESTS #######" << std::endl;
+	std::cout << PURPLE "####### MATERIASOURCE TESTS #######" RESET << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "<-----Learning Materia----->" << std::endl;
@@ -93,13 +93,13 @@ void materiaSourceTests()
 	delete src;
 
 	std::cout << std::endl;
-	std::cout << "#############################" << std::endl;
+	std::cout << PURPLE "#############################" RESET << std::endl;
 	std::cout << std::endl;
 }
 
 void charactersTests()
 {
-	std::cout << "####### CHARACTERS TESTS #######" << std::endl;
+	std::cout << PURPLE "####### CHARACTERS TESTS #######" RESET << std::endl;
 	std::cout << std::endl;
 
 	IMateriaSource* src = new MateriaSource();
@@ -172,8 +172,10 @@ void charactersTests()
 		return ;
 	}
 	lewisCopy->showInventory();
-	std::cout << "##Copy name = " << lewisCopy->getName() << std::endl;
+	std::cout << "#Copy name = " << lewisCopy->getName() << std::endl;
 	lewis->equip(m3);
+	std::cout << "##Lewis inventory##" << std::endl;
+	lewis->showInventory();
 	std::cout << "##Copy inventory won't change##" << std::endl;
 	lewisCopy->showInventory();
 
@@ -232,13 +234,13 @@ void charactersTests()
 	delete m5;
 	delete m4;
 
-	std::cout << "############################" << std::endl;
+	std::cout << PURPLE "############################" RESET << std::endl;
 	std::cout << std::endl;
 }
 
 void subjectTests(void)
 {
-	std::cout << "####### SUBJECT TEST #######" << std::endl;
+	std::cout << PURPLE "####### SUBJECT TEST #######" RESET << std::endl;
 	std::cout << std::endl;
 
 	IMateriaSource* src = new MateriaSource();
@@ -276,7 +278,7 @@ void subjectTests(void)
 	delete src;
 
 	std::cout << std::endl;
-	std::cout << "######################" << std::endl;
+	std::cout << PURPLE "######################" RESET << std::endl;
 	std::cout << std::endl;
 }
 

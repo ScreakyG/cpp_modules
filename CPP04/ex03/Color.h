@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
+/*   Color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 19:04:00 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/25 23:25:44 by fgonzale         ###   ########.fr       */
+/*   Created: 2024/02/25 23:24:06 by fgonzale          #+#    #+#             */
+/*   Updated: 2024/02/25 23:24:47 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IMATERIASOURCE_HPP
-# define IMATERIASOURCE_HPP
+#ifndef COLOR_H
+# define COLOR_H
 
-#include "AMateria.hpp"
+# define RESET	"\e[0m"
 
-class IMateriaSource
-{
-	public:
-		virtual ~IMateriaSource() {}
-		virtual void learnMateria(AMateria*) = 0;
-		virtual AMateria* createMateria(std::string const & type) = 0;
-};
-
+# define BLACK	"\e[30m"
+# define RED	"\e[31m"
+# define GREEN	"\e[32m"
+# define YELLOW	"\e[33m"
+# define BLUE	"\e[34m"
+# define PURPLE	"\e[35m"
+# define CYAN	"\e[36m"
+# define WHITE	"\e[37m"
 
 #endif

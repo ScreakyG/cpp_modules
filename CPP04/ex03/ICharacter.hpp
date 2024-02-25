@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:34:59 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 17:15:19 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 23:26:22 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ICHARACTER_HPP
 
 #include "AMateria.hpp"
+#include "Color.h"
 
 class AMateria;
 

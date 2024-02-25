@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:49:53 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/25 18:17:02 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:01:41 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 
 Character::Character(void) : _name("Default")
 {
-	std::cout << "Character default constructor called" << std::endl;
+	std::cout << YELLOW "Character default constructor called" RESET << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
 }
 
 Character::Character(std::string name) : _name(name)
 {
-	std::cout << "Character name constructor called" << std::endl;
+	std::cout << YELLOW "Character name constructor called" RESET << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
 }
 
 Character::Character(const Character& src)
 {
-	std::cout << "Character copy constructor called" << std::endl;
+	std::cout << YELLOW "Character copy constructor called" RESET << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
 	*this = src;
@@ -40,7 +40,7 @@ Character::Character(const Character& src)
 
 Character::~Character(void)
 {
-	std::cout << "Character deconstructor called" << std::endl;
+	std::cout << RED "Character deconstructor called" YELLOW << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i])
@@ -54,7 +54,7 @@ Character::~Character(void)
 
 Character& Character::operator=(const Character& src)
 {
-	std::cout << "Character copy assignement called" << std::endl;
+	std::cout << YELLOW "Character copy assignement called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_name = src._name;
@@ -87,24 +87,24 @@ void Character::equip(AMateria* m)
 
 	if (!m)
 	{
-		std::cout << this->_name << " : Could not equip materia because in does not exist" << std::endl;
+		std::cout << this->_name << RED " : Could not equip materia because in does not exist" RESET << std::endl;
 		return ;
 	}
 	for (idx = 0; idx < 4; idx++)
 	{
 		if (_inventory[idx] == m)
 		{
-			std::cout << this->_name <<" : You already have this materia at slot " << idx << std::endl;
+			std::cout << this->_name << RED " : You already have this materia at slot " RESET << idx << std::endl;
 			return ;
 		}
 		else if (_inventory[idx] == NULL)
 		{
 			_inventory[idx] = m;
-			std::cout << this->_name << " : AMateria " << m->getType() << " added to inventory at slot " << idx << std::endl;
+			std::cout << this->_name << GREEN " : AMateria " RESET << m->getType() << GREEN " added to inventory at slot " RESET << idx << std::endl;
 			return ;
 		}
 	}
-	std::cout << "Inventory is full" << std::endl;
+	std::cout << RED "Inventory is full" RESET << std::endl;
 }
 
 void Character::unequip(int idx)
@@ -112,17 +112,17 @@ void Character::unequip(int idx)
 
 	if (idx < 0 || idx > 3)
 	{
-		std::cout << this->_name << " : No item in this slot" << std::endl;
+		std::cout << this->_name << RED " : No item in this slot" RESET << std::endl;
 		return ;
 	}
 
 	if (this->_inventory[idx])
 	{
 		this->_inventory[idx] = NULL;
-		std::cout << this->_name << " : Item removed at slot " << idx << std::endl;
+		std::cout << this->_name << GREEN " : Item removed at slot " RESET << idx << std::endl;
 	}
 	else
-		std::cout << this->_name << " : This slot is empty" << std::endl;
+		std::cout << this->_name << RED " : This slot is empty" RESET << std::endl;
 	return ;
 }
 
@@ -130,23 +130,25 @@ void Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 3)
 	{
-		std::cout << this->_name << " : Invalid slot" << std::endl;
+		std::cout << this->_name << RED " : Invalid slot" RESET << std::endl;
 		return ;
 	}
 	if (this->_inventory[idx])
 		this->_inventory[idx]->use(target);
 	else
-		std::cout << this->_name << " : Can't use a empty slot" << std::endl;
+		std::cout << this->_name << RED " : Can't use a empty slot" RESET << std::endl;
 }
 
 void Character::showInventory(void) const
 {
+	std::cout << "[";
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i] == NULL)
-			std::cout << "Empty slot" << std::endl;
+			std::cout << " empty_Slot ";
 		else
-			std::cout << this->_inventory[i]->getType() << std::endl;
+			std::cout << this->_inventory[i]->getType() << " ";
 	}
+	std::cout << "]" << std::endl;
 	return ;
 }
