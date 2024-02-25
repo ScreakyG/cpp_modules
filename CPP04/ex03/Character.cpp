@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:49:53 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 22:10:46 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:17:02 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void Character::equip(AMateria* m)
 			return ;
 		}
 	}
+	std::cout << "Inventory is full" << std::endl;
 }
 
 void Character::unequip(int idx)
 {
-	//AMateria* removed; // Que faire de ce pointeur.
 
 	if (idx < 0 || idx > 3)
 	{
@@ -118,7 +118,6 @@ void Character::unequip(int idx)
 
 	if (this->_inventory[idx])
 	{
-		//removed = this->_inventory[idx]; // Que faire de ce pointeur.
 		this->_inventory[idx] = NULL;
 		std::cout << this->_name << " : Item removed at slot " << idx << std::endl;
 	}
@@ -138,4 +137,16 @@ void Character::use(int idx, ICharacter& target)
 		this->_inventory[idx]->use(target);
 	else
 		std::cout << this->_name << " : Can't use a empty slot" << std::endl;
+}
+
+void Character::showInventory(void) const
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i] == NULL)
+			std::cout << "Empty slot" << std::endl;
+		else
+			std::cout << this->_inventory[i]->getType() << std::endl;
+	}
+	return ;
 }

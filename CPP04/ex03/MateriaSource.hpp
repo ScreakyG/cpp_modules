@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:05:15 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 19:22:56 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:31:12 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class MateriaSource : public IMateriaSource
 
 		void learnMateria(AMateria*);
 		AMateria* createMateria(std::string const & type);
+
+		void showRecipes(void) const;
 
 	private:
 

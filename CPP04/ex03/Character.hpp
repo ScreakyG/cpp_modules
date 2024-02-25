@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:41:12 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 18:40:04 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:05:40 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ class Character : public ICharacter
 		void equip(AMateria* m);
 		void unequip(int idx);
 		void use(int idx, ICharacter& target);
+
+		void showInventory(void) const;
 
 	private:
 		std::string _name;

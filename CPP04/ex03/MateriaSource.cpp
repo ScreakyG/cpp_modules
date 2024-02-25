@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:10:27 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/24 19:46:55 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:49:33 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void MateriaSource::learnMateria(AMateria* materia)
 {
 	if (!materia)
 	{
-		std::cout << "Could not learn materia " << materia->getType() << " because in does not exist" << std::endl;
+		std::cout << "Could not learn materia because in does not exist" << std::endl;
 		return ;
 	}
 
@@ -86,6 +86,7 @@ void MateriaSource::learnMateria(AMateria* materia)
 		}
 	}
 	std::cout << "I cant learn more than 4 materias" << std::endl;
+	delete materia;
 	return ;
 }
 
@@ -104,4 +105,16 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 	}
 	std::cout << "MateriaSource have not learn this type" << std::endl;
 	return (0);
+}
+
+void MateriaSource::showRecipes(void) const
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i] == NULL)
+			std::cout << "Empty slot" << std::endl;
+		else
+			std::cout << this->_inventory[i]->getType() << std::endl;
+	}
+	return ;
 }
