@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:24:07 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/25 18:50:10 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/25 23:14:17 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 void materiaSourceTests()
 {
+	std::cout << "####### MATERIASOURCE TESTS #######" << std::endl;
+	std::cout << std::endl;
+
 	std::cout << "<-----Learning Materia----->" << std::endl;
 	std::cout << std::endl;
 	MateriaSource *src = new MateriaSource();
@@ -90,12 +93,15 @@ void materiaSourceTests()
 	delete src;
 
 	std::cout << std::endl;
-	std::cout << "<------------------------>" << std::endl;
+	std::cout << "#############################" << std::endl;
 	std::cout << std::endl;
 }
 
 void charactersTests()
 {
+	std::cout << "####### CHARACTERS TESTS #######" << std::endl;
+	std::cout << std::endl;
+
 	IMateriaSource* src = new MateriaSource();
 	if (!src)
 		return ;
@@ -225,11 +231,58 @@ void charactersTests()
 
 	delete m5;
 	delete m4;
+
+	std::cout << "############################" << std::endl;
+	std::cout << std::endl;
+}
+
+void subjectTests(void)
+{
+	std::cout << "####### SUBJECT TEST #######" << std::endl;
+	std::cout << std::endl;
+
+	IMateriaSource* src = new MateriaSource();
+	if (!src)
+		return ;
+
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+
+	ICharacter* me = new Character("me");
+	if (!me)
+	{
+		delete src;
+		return ;
+	}
+
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+
+	ICharacter* bob = new Character("bob");
+	if (!bob)
+	{
+		delete src;
+		delete me;
+		return ;
+	}
+
+	me->use(0, *bob);
+	me->use(1, *bob);
+	delete bob;
+	delete me;
+	delete src;
+
+	std::cout << std::endl;
+	std::cout << "######################" << std::endl;
+	std::cout << std::endl;
 }
 
 int main()
 {
+	subjectTests();
 	materiaSourceTests();
 	charactersTests();
-
 }
