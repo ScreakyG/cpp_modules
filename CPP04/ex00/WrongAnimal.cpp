@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:14:27 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 15:15:40 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:12:24 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 WrongAnimal::WrongAnimal(void) : _type("WrongAnimal")
 {
-	std::cout << "WrongAnimal constructor called" << std::endl;
+	std::cout << YELLOW "WrongAnimal constructor called" RESET << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& src)
 {
-	std::cout << "WrongAnimal copy constructor called" << std::endl;
+	std::cout << YELLOW "WrongAnimal copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 WrongAnimal::~WrongAnimal(void)
 {
-	std::cout << "WrongAnimal deconstructor called" << std::endl;
+	std::cout << RED "WrongAnimal deconstructor called" RESET << std::endl;
 }
 
 /******************************************************************************/
@@ -34,7 +34,7 @@ WrongAnimal::~WrongAnimal(void)
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& src)
 {
-	std::cout << "WrongAnimal assignement operator called" << std::endl;
+	std::cout << YELLOW "WrongAnimal assignement operator called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_type = src._type;

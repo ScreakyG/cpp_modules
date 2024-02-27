@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:04:52 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 19:51:22 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:28:00 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 
 Brain::Brain(void)
 {
-	std::cout << "Brain constructor called" << std::endl;
+	std::cout << YELLOW "Brain constructor called" RESET << std::endl;
 }
 
 Brain::Brain(const Brain& src)
 {
-	std::cout << "Brain copy constructor called" << std::endl;
+	std::cout << YELLOW "Brain copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 Brain::~Brain(void)
 {
-	std::cout << "Brain deconstructor called" << std::endl;
+	std::cout << RED "Brain deconstructor called" RESET << std::endl;
 }
 
 /******************************************************************************/
@@ -40,7 +40,7 @@ Brain& Brain::operator=(const Brain& src)
 {
 	int	i;
 
-	std::cout << "Brain assignement operator called" << std::endl;
+	std::cout << YELLOW "Brain assignement operator called" RESET << std::endl;
 	if (this != &src)
 	{
 		for (i = 0; i < 100; i++)

@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:44:58 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 21:05:17 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:50:16 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 
 AAnimal::AAnimal(void) : _type("Animal")
 {
-	std::cout << "Animal constructor called" << std::endl;
+	std::cout << YELLOW "Animal constructor called" RESET << std::endl;
 }
 
 AAnimal::AAnimal(const AAnimal& src)
 {
-	std::cout << "Animal copy constructor called" << std::endl;
+	std::cout << YELLOW "Animal copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 AAnimal::~AAnimal(void)
 {
-	std::cout << "Animal deconstructor called" << std::endl;
+	std::cout << RED "Animal deconstructor called" RESET << std::endl;
 }
 
 /******************************************************************************/
@@ -38,7 +38,7 @@ AAnimal::~AAnimal(void)
 
 AAnimal& AAnimal::operator=(const AAnimal& src)
 {
-	std::cout << "Animal assignement operator called" << std::endl;
+	std::cout << YELLOW "Animal assignement operator called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_type = src._type;

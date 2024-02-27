@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:14:53 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 19:19:54 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:30:53 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ Dog::Dog(void) : Animal(), _brain(new Brain())
 {
 	if (!_brain)
 		std::cout << "Failed to allocate memory for Brain" << std::endl;
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << YELLOW "Dog constructor called" RESET << std::endl;
 	_type = "Dog";
 }
 
 Dog::Dog(const Dog& src) : Animal(), _brain(NULL)
 {
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << YELLOW "Dog copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 Dog::~Dog(void)
 {
-	std::cout << "Dog deconstructor called" << std::endl;
+	std::cout << RED "Dog deconstructor called" RESET << std::endl;
 	delete _brain;
 }
 
@@ -42,7 +42,7 @@ Dog::~Dog(void)
 
 Dog& Dog::operator=(const Dog& src)
 {
-	std::cout << "Dog assignement operator called" << std::endl;
+	std::cout << YELLOW "Dog assignement operator called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_type = src._type;

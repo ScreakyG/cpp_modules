@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 13:41:33 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/27 16:09:33 by fgonzale         ###   ########.fr       */
+/*   Created: 2024/02/25 23:24:06 by fgonzale          #+#    #+#             */
+/*   Updated: 2024/02/25 23:24:47 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef COLOR_H
+# define COLOR_H
 
-#include <iostream>
-#include "Color.h"
+# define RESET	"\e[0m"
 
-class Animal
-{
-	public:
-
-		Animal(void);
-		Animal(const Animal& src);
-		virtual ~Animal(void);
-		Animal& operator=(const Animal& src);
-
-		virtual void makeSound(void) const;
-
-		std::string getType(void) const;
-
-	protected:
-		std::string _type;
-};
+# define BLACK	"\e[30m"
+# define RED	"\e[31m"
+# define GREEN	"\e[32m"
+# define YELLOW	"\e[33m"
+# define BLUE	"\e[34m"
+# define PURPLE	"\e[35m"
+# define CYAN	"\e[36m"
+# define WHITE	"\e[37m"
 
 #endif

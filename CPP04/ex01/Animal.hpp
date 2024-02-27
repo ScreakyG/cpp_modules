@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:41:33 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 20:59:24 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:26:56 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ANIMAL_HPP
 
 #include <iostream>
+#include "Color.h"
 
 class Animal
 {

@@ -15,6 +15,7 @@
 # define WRONGANIMAL_HPP
 
 #include <iostream>
+#include "Color.h"
 
 class WrongAnimal
 

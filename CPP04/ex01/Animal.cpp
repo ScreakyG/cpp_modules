@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:44:58 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/23 14:55:51 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:27:28 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 
 Animal::Animal(void) : _type("Animal")
 {
-	std::cout << "Animal constructor called" << std::endl;
+	std::cout << YELLOW "Animal constructor called" RESET << std::endl;
 }
 
 Animal::Animal(const Animal& src)
 {
-	std::cout << "Animal copy constructor called" << std::endl;
+	std::cout << YELLOW "Animal copy constructor called" RESET << std::endl;
 	*this = src;
 }
 
 Animal::~Animal(void)
 {
-	std::cout << "Animal deconstructor called" << std::endl;
+	std::cout << RED "Animal deconstructor called" RESET << std::endl;
 }
 
 /******************************************************************************/
@@ -38,7 +38,7 @@ Animal::~Animal(void)
 
 Animal& Animal::operator=(const Animal& src)
 {
-	std::cout << "Animal assignement operator called" << std::endl;
+	std::cout << YELLOW "Animal assignement operator called" RESET << std::endl;
 	if (this != &src)
 	{
 		this->_type = src._type;
