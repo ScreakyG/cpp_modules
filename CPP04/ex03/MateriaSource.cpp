@@ -6,7 +6,7 @@
 /*   By: fgonzale <fgonzale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:10:27 by fgonzale          #+#    #+#             */
-/*   Updated: 2024/02/25 23:55:19 by fgonzale         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:49:29 by fgonzale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,12 @@ void MateriaSource::learnMateria(AMateria* materia)
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->_inventory[i] == NULL)
+		if (this->_inventory[i] == materia)
+		{
+			std::cout << RED "You have already learned this materia" RESET << std::endl;
+			return ;
+		}
+		else if (this->_inventory[i] == NULL)
 		{
 			this->_inventory[i] = materia;
 			std::cout << GREEN "Learned materia " RESET << materia->getType() << std::endl;
