@@ -2,6 +2,7 @@
 
 void	gradeTests(const std::string &name, int grade)
 {
+	std::cout << CYAN << "Creating " << name << " with grade " << grade << RESET << std::endl;
 	try
 	{
 		Bureaucrat test(name, grade);
@@ -10,6 +11,7 @@ void	gradeTests(const std::string &name, int grade)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 int main(void)
@@ -34,12 +36,13 @@ int main(void)
 		Bureaucrat	bill("Bill", 100);
 		Bureaucrat	jack("Jack", 50);
 		jack = bill;
-		std::cout << jack;
+		std::cout << jack << std::endl;
 	}
 	catch (std::exception &e)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
+	std::cout << std::endl;
 
 	// Increase / Decrease tests
 
@@ -47,11 +50,11 @@ int main(void)
 	{
 		Bureaucrat ceo("Logan", 1);
 		ceo.decrease_grade();
-		std::cout << ceo;
+		std::cout << ceo << std::endl;
 
 		Bureaucrat kendall("Kendall", 150);
 		kendall.increase_grade();
-		std::cout << kendall;
+		std::cout << kendall << std::endl;
 	}
 	catch (std::exception &e)
 	{
