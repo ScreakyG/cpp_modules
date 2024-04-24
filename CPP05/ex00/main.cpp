@@ -6,7 +6,7 @@ void	gradeTests(const std::string &name, int grade)
 	{
 		Bureaucrat test(name, grade);
 	}
-	catch (const std::exception &e)
+	catch (std::exception &e)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
@@ -34,10 +34,9 @@ int main(void)
 		Bureaucrat	bill("Bill", 100);
 		Bureaucrat	jack("Jack", 50);
 		jack = bill;
-
 		std::cout << jack;
 	}
-	catch (const std::exception &e)
+	catch (std::exception &e)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
@@ -54,7 +53,7 @@ int main(void)
 		kendall.increase_grade();
 		std::cout << kendall;
 	}
-	catch (const std::exception &e)
+	catch (std::exception &e)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
