@@ -1,16 +1,17 @@
 NAME = a.out
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g
-CC = c++
+
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CXX = c++
 SRCS = main.cpp Bureaucrat.cpp
 SRCS_OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 %.o: %.cpp
-	$(CC) $(FLAGS) -c $^ -o $@
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 $(NAME): $(SRCS_OBJS)
-		$(CC) $(FLAGS) $(SRCS_OBJS) -o $(NAME)
+		$(CXX) $(CXXFLAGS) $(SRCS_OBJS) -o $(NAME)
 
 clean:
 		rm -rf $(SRCS_OBJS)
