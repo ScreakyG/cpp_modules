@@ -14,6 +14,7 @@
 class Bureaucrat
 {
     public:
+		Bureaucrat(); //Default constructor
         Bureaucrat(const std::string &name, int grade);
         ~Bureaucrat(); // Default destructor.
         Bureaucrat(const Bureaucrat &src); // Copy constructor.
@@ -37,7 +38,6 @@ class Bureaucrat
         };
 
     private:
-        Bureaucrat(); //Default constructor.
 
         const std::string	_name;
         int					_grade;
