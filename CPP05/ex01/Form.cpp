@@ -9,6 +9,8 @@ Form::Form(const std::string &name, const int signGrade, const int execGrade): _
 {
 	if (signGrade < 1)
 		throw Form::GradeTooHighException();
+	else if (signGrade > 150)
+		throw Form::GradeTooLowException();
 	std::cout << YELLOW << "Successfully created form named " << this->_name << RESET << std::endl;
 }
 
@@ -19,5 +21,10 @@ Form::~Form()
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return ("Form required grades are too high , rank 1 is highest");
+	return ("Form required grades are too high , grade 1 is highest");
+}
+
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return ("Form required grades are too low, grade 150 is lowest");
 }

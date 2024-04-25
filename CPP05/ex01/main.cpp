@@ -7,7 +7,7 @@ int main(void)
 {
 	try
 	{
-		Form test("Contrat", 0, 1);
+		Form test("Contrat", 1, 151);
 	}
 	catch (const std::exception &e)
 	{
