@@ -16,7 +16,9 @@ class Form
 	public:
 		Form(); // Canonical default constructor
 		Form(const std::string &name, const int signGrade, const int execGrade);
+		Form(const Form &src); // Canonical copy constructor
 		~Form(); // Canonical destructor
+		Form &operator=(const Form &rhs); // Canonical assignment operator
 
 		class GradeTooHighException : public std::exception
 		{
