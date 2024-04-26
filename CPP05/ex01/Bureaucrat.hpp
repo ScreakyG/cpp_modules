@@ -11,6 +11,8 @@
 #define PURPLE	"\e[35m"
 #define CYAN	"\e[36m"
 
+class Form;
+
 class Bureaucrat
 {
     public:
@@ -24,6 +26,7 @@ class Bureaucrat
         int					getGrade() const;
         void				increase_grade();
         void				decrease_grade();
+		void				signForm(const Form& obj) const;
 
         class  GradeTooHighException : public std::exception
         {

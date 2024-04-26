@@ -8,8 +8,8 @@ int main(void)
 	try
 	{
 		Form test("Contrat", 1, 150);
-		Form test2("Contrat2", 150, 1);
-		test = test2;
+		Bureaucrat ceo("Logan", 2);
+		ceo.signForm(test);
 	}
 	catch (const std::exception &e)
 	{

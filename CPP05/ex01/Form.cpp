@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form(): _isSigned(false), _name("Default"), _requiredSignGrade(150), _requiredExecGrade(150)
 {
@@ -42,4 +43,41 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 {
 	return ("Form required grades are too low, grade 150 is lowest");
+}
+
+const bool& Form::getIsSigned() const
+{
+	return (this->_isSigned);
+}
+
+const std::string& Form::getName() const
+{
+	return (this->_name);
+}
+
+int Form::getSignGrade() const
+{
+	return (this->_requiredSignGrade);
+}
+
+int Form::getExecGrade() const
+{
+	return (this->_requiredExecGrade);
+}
+
+std::ostream& operator << (std::ostream &os, const Form &obj)
+{
+	os << obj.getName() << " : " << "Is Signed = " << obj.getIsSigned() << ", Required Sign Grade = " << obj.getSignGrade() << ", Required Exec Grade = " << obj.getExecGrade() << std::endl;
+	return (os);
+}
+
+void Form::beSigned(const Bureaucrat &obj)
+{
+	if (obj.getGrade() > this->getSignGrade())
+	{
+		obj.signForm(*this);
+		throw Form::GradeTooLowException();
+	}
+	this->_isSigned = true;
+	obj.signForm(*this);
 }

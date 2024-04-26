@@ -11,6 +11,8 @@
 #define PURPLE	"\e[35m"
 #define CYAN	"\e[36m"
 
+class Bureaucrat;
+
 class Form
 {
 	public:
@@ -19,6 +21,16 @@ class Form
 		Form(const Form &src); // Canonical copy constructor
 		~Form(); // Canonical destructor
 		Form &operator=(const Form &rhs); // Canonical assignment operator
+
+
+		//Getters
+		const	bool&	getIsSigned() const;
+		const	std::string& getName() const;
+		int	getSignGrade() const;
+		int	getExecGrade() const;
+
+		void	beSigned(const Bureaucrat &obj);
+
 
 		class GradeTooHighException : public std::exception
 		{
@@ -37,5 +49,7 @@ class Form
 		const int			_requiredSignGrade;
 		const int			_requiredExecGrade;
 };
+
+std::ostream& operator<<(std::ostream &os, const Form& obj);
 
 #endif
