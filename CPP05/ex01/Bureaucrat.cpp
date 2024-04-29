@@ -62,12 +62,17 @@ void    Bureaucrat::decrease_grade()
     this->_grade = current_grade;
 }
 
-void	Bureaucrat::signForm(const Form& obj) const
+void	Bureaucrat::signForm(Form& obj) const
 {
-	if (obj.getIsSigned() == true)
-		std::cout << this->getName() << " signed " << obj.getName() << std::endl;
-	else if (obj.getIsSigned() == false)
-		std::cout << this->getName() << " couldn't sign " << obj.getName() << " because required grade is " << obj.getSignGrade() << " and " << this->getName() << " is grade " << this->getGrade() << std::endl;
+	try
+	{
+		obj.beSigned(*this);
+		std::cout << GREEN << this->getName() << " signed " << obj.getName() << RESET << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << this->getName() << " couldn't sign " << obj.getName() << " because required grade is " << obj.getSignGrade() << " and " << this->getName() << " is grade " << this->getGrade() << RESET << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
