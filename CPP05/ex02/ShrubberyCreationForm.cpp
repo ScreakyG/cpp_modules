@@ -32,7 +32,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-void ShrubberyCreationForm::exec_form(const Bureaucrat &executor) const
+void ShrubberyCreationForm::exec_form() const
 {
 	std::ofstream newFile(this->_target.c_str(), std::ofstream::out | std::ofstream::app);
 	if (newFile.is_open())
@@ -52,5 +52,4 @@ void ShrubberyCreationForm::exec_form(const Bureaucrat &executor) const
 	{
 		std::cerr << RED << "Couldn't open file" << RESET << std::endl;
 	}
-	std::cout << GREEN << executor.getName() << " executed " << this->getName() << std::endl;
 }

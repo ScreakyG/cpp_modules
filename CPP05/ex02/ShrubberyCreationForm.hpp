@@ -24,7 +24,7 @@ class ShrubberyCreationForm : public AForm
 
 	private :
 		std::string _target;
-		void exec_form(const Bureaucrat &executor) const;
+		void exec_form() const;
 };
 
 #endif

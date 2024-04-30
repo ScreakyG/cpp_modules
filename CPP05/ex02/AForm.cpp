@@ -93,7 +93,10 @@ void AForm::execute(const Bureaucrat &executor) const
 		else if (executor.getGrade() > this->_requiredExecGrade)
 			throw AForm::GradeTooLowException();
 		else
-			exec_form(executor);
+		{
+			exec_form();
+			std::cout << GREEN << executor.getName() + " executed " + this->getName() << RESET << std::endl;
+		}
 	}
 	catch (std::exception &e)
 	{

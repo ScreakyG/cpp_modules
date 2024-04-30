@@ -54,7 +54,7 @@ class AForm
 		const std::string	_name;
 		const int			_requiredSignGrade;
 		const int			_requiredExecGrade;
-		virtual void	exec_form(Bureaucrat const &executor) const = 0;
+		virtual void	exec_form() const = 0;
 };
 
 std::ostream& operator<<(std::ostream &os, const AForm& obj);
