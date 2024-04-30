@@ -21,10 +21,10 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &rhs); // Assignement operator
 
 		ShrubberyCreationForm(const std::string target);
-		void exec_form(const Bureaucrat &executor) const;
 
 	private :
 		std::string _target;
+		void exec_form(const Bureaucrat &executor) const;
 };
 
 #endif

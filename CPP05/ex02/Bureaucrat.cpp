@@ -75,6 +75,11 @@ void	Bureaucrat::signForm(AForm& obj) const
 	}
 }
 
+void	Bureaucrat::executeForm(AForm& obj) const
+{
+	obj.execute(*this);
+}
+
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
     return ("Error with grade , it's over grade 1");

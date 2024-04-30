@@ -4,14 +4,13 @@
 
 int main(void)
 {
-	Bureaucrat ceo("Logan", 1);
-	AForm* test = new ShrubberyCreationForm("Home");
-	std::cout << *test;
-	
-	ceo.signForm(*test);
-	test->execute(ceo);
+	Bureaucrat ceo("Logan", 145);
+	Bureaucrat boss("Kendall", 137);
+	ShrubberyCreationForm test2("Start");
+	std::cout << test2;
+	//ceo.signForm(test2);
+	boss.executeForm(test2);
 
-	delete test;
 }
 
 
