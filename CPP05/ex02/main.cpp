@@ -2,16 +2,17 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
 	Bureaucrat ceo("Logan", 1);
 	Bureaucrat boss("Kendall", 100);
-	RobotomyRequestForm test2("Start");
+	PresidentialPardonForm test2("Roman");
 	std::cout << test2;
 	ceo.signForm(test2);
 	//test2.beSigned(ceo);
-	boss.executeForm(test2);
+	ceo.executeForm(test2);
 
 }
 
