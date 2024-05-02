@@ -9,7 +9,6 @@ class ScalarConverter
 {
 	public:
 		static void	convert(std::string value);
-		static void	scalarFromFloat(std::string &value);
 	private:
 		ScalarConverter(); // Default constructor
 		ScalarConverter(const ScalarConverter &src); // Copy constructor

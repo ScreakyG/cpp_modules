@@ -37,19 +37,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &rhs)
 	return (*this);
 }
 
-bool	hasOnlyDigits(std::string &value)
-{
-	for(size_t	i = 0; i < value.length(); i++)
-	{
-		if (value[0] == '+' || value[0] == '-')
-			continue;
-		if (!std::isdigit(value[i]))
-			return (false);
-	}
-	return (true);
-}
-
-void	printChar(int character)
+void	printChar(long character)
 {
 	if (character > CHAR_MAX || character < CHAR_MIN)
 		std::cout << "char: impossible" << std::endl;
@@ -77,7 +65,7 @@ void	printFloat(float nb)
 
 void	printDouble(double nb)
 {
-	if (nb > DBL_MAX|| nb < -DBL_MAX)
+	if (nb > DBL_MAX || nb < -DBL_MAX)
 		std::cout << "double: impossible" << std::endl;
 	else
 		std::cout << "double: " << nb << std::endl;
@@ -103,7 +91,18 @@ void	scalarFromInt(std::string &value)
 	printDouble(static_cast<double>(intNb));
 }
 
-void	ScalarConverter::scalarFromFloat(std::string &value)
+void	scalarFromFloat(std::string &value)
+{
+	double	doubleValue;
+
+	doubleValue = std::atof(value.c_str());
+	printChar(static_cast<int>(doubleValue));
+	printInt(static_cast<int>(doubleValue));
+	printFloat(static_cast<float>(doubleValue));
+	printDouble(doubleValue);
+}
+
+void	scalarFromDouble(std::string &value)
 {
 	double	doubleValue;
 
@@ -151,6 +150,10 @@ void	ScalarConverter::convert(std::string value)
 			std::cout << "Will convert from a float" << std::endl;
 			scalarFromFloat(value);
 			break ;
+		case 3:
+			std::cout << "Will convert from a double" << std::endl;
+			scalarFromDouble(value);
+			break ;
 		default:
 			std::cout << "Will not convert / impossible" << std::endl;
 			scalarImpossible();
@@ -159,15 +162,50 @@ void	ScalarConverter::convert(std::string value)
 
 }
 
+bool	isInt(std::string &value)
+{
+	char	*endptr;
+
+	std::strtol(value.c_str(), &endptr, 0);
+	if (endptr == value.c_str() || *endptr != '\0')
+		return (false);
+	return (true);
+}
+
+bool	isFloat(std::string &value)
+{
+	char	*endptr;
+
+	std::strtof(value.c_str(), &endptr);
+	if (endptr == value.c_str() || *endptr != 'f')
+		return (false);
+	if (*endptr == 'f' && *(endptr + 1) != '\0')
+		return (false);
+	return (true);
+}
+
+bool	isDouble(std::string &value)
+{
+	char	*endptr;
+
+	std::strtod(value.c_str(), &endptr);
+	if (endptr == value.c_str() || *endptr != '\0')
+		return (false);
+	return (true);
+}
+
 std::string ScalarConverter::identifyType(std::string value)
 {
 	if (value.length() == 0)
 		return ("empty");
 	if (value.length() == 1 && !std::isdigit(value[0]))
 		return ("char");
-	if (hasOnlyDigits(value))
+	if (isInt(value))
 		return ("int");
-
+	if (isFloat(value))
+		return ("float");
+	if (isDouble(value))
+		return ("double");
 	return ("other");
 }
 
