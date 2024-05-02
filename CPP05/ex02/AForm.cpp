@@ -86,21 +86,14 @@ void AForm::beSigned(const Bureaucrat &obj)
 
 void AForm::execute(const Bureaucrat &executor) const
 {
-	try
+	if (this->_isSigned == false)
+		throw AForm::FormNotSignedException();
+	else if (executor.getGrade() > this->_requiredExecGrade)
+		throw AForm::GradeTooLowException();
+	else
 	{
-		if (this->_isSigned == false)
-			throw AForm::FormNotSignedException();
-		else if (executor.getGrade() > this->_requiredExecGrade)
-			throw AForm::GradeTooLowException();
-		else
-		{
-			exec_form();
-			std::cout << GREEN << executor.getName() + " executed " + this->getName() << RESET << std::endl;
-		}
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << RED << executor.getName() <<" couldn't execute form " << this->_name << " because : " << e.what() << RESET << std::endl;
+		exec_form();
+		std::cout << GREEN << executor.getName() + " executed " + this->getName() << RESET << std::endl;
 	}
 }
 

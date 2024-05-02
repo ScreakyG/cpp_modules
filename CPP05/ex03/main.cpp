@@ -9,7 +9,7 @@ void	formTest(std::string formName, std::string target)
 {
 	Intern	random;
 	AForm *form = NULL;
-	Bureaucrat ceo("Logan", 1);
+	Bureaucrat ceo("Logan", 25);
 
 	form = random.makeForm(formName, target);
 	if (form)
