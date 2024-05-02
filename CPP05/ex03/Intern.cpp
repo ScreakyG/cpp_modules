@@ -33,7 +33,7 @@ AForm* Intern::makeForm(const std::string &form_name, const std::string &target)
 	std::size_t	idx = -1;
 	std::size_t	i = 0;
 
-	while (i < forms->length())
+	while (i < 3)
 	{
 		if (forms[i] == form_name)
 			idx = i;
