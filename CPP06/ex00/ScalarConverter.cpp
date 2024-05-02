@@ -93,14 +93,33 @@ void	scalarFromChar(std::string &value)
 
 void	scalarFromInt(std::string &value)
 {
-	long	nb_atoi;
+	long	intNb;
 
-	nb_atoi = std::atol(value.c_str());
+	intNb = std::atol(value.c_str());
 
-	printChar(nb_atoi);
-	printInt(nb_atoi);
-	printFloat(static_cast<float>(nb_atoi));
-	printDouble(static_cast<double>(nb_atoi));
+	printChar(intNb);
+	printInt(intNb);
+	printFloat(static_cast<float>(intNb));
+	printDouble(static_cast<double>(intNb));
+}
+
+void	ScalarConverter::scalarFromFloat(std::string &value)
+{
+	double	doubleValue;
+
+	doubleValue = std::atof(value.c_str());
+	printChar(static_cast<int>(doubleValue));
+	printInt(static_cast<int>(doubleValue));
+	printFloat(static_cast<float>(doubleValue));
+	printDouble(doubleValue);
+}
+
+void	scalarImpossible()
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: impossible" << std::endl;
+	std::cout << "double: impossible" << std::endl;
 }
 
 void	ScalarConverter::convert(std::string value)
@@ -128,9 +147,13 @@ void	ScalarConverter::convert(std::string value)
 			std::cout << "Will convert from a int" << std::endl;
 			scalarFromInt(value);
 			break ;
+		case 2:
+			std::cout << "Will convert from a float" << std::endl;
+			scalarFromFloat(value);
+			break ;
 		default:
 			std::cout << "Will not convert / impossible" << std::endl;
-			//scalarImpossible(value);
+			scalarImpossible();
 			break ;
 	}
 
