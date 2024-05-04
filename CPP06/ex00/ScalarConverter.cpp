@@ -5,6 +5,8 @@
 #include <limits.h>
 #include <cfloat>
 #include <iomanip>
+#include <cerrno>
+#include <cstring>
 
 #define RESET	"\e[0m"
 #define RED		"\e[31m"
@@ -57,23 +59,19 @@ void	printInt(long nb)
 
 void	printFloat(float nb)
 {
-	// if (nb > FLT_MAX || nb < -FLT_MAX)
-	// 	std::cout << "float: impossible" << std::endl;
-	// else
-		std::cout << "float: " << nb << "f" << std::endl;
-		//std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
+	std::cout << "float: " << nb << "f" << std::endl;
+	//std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
 }
 
 void	printDouble(double nb)
 {
-	// if (nb > DBL_MAX || nb < -DBL_MAX)
-	// 	std::cout << "double: impossible" << std::endl;
-	// else
-		std::cout << "double: " << nb << std::endl;
+	std::cout << "double: " << nb << std::endl;
 }
 
 void	scalarFromChar(std::string &value)
 {
+	std::cout << CYAN << "Converting CHAR : " + value << RESET << std::endl;
+
 	printChar(static_cast<int>(value[0]));
 	printInt(static_cast<long>(value[0]));
 	printFloat(static_cast<float>(value[0]));
@@ -86,6 +84,8 @@ void	scalarFromInt(std::string &value)
 
 	intNb = std::atol(value.c_str());
 
+	std::cout << CYAN << "Converting INT : " + value << RESET << std::endl;
+
 	printChar(intNb);
 	printInt(intNb);
 	printFloat(static_cast<float>(intNb));
@@ -94,32 +94,42 @@ void	scalarFromInt(std::string &value)
 
 void	scalarFromFloat(std::string &value)
 {
-	double	doubleValue;
+	float	floatValue;
 
-	doubleValue = std::atof(value.c_str());
-	printChar(static_cast<int>(doubleValue));
-	printInt(static_cast<long>(doubleValue));
-	printFloat(static_cast<float>(doubleValue));
-	printDouble(doubleValue);
+	errno = 0;
+	floatValue = std::strtof(value.c_str(), NULL);
+	if (errno)
+	{
+		std::cerr << RED << "Couldn't convert float : " << std::strerror(errno) << RESET << std::endl;
+		return ;
+	}
+
+	std::cout << CYAN << "Converting FLOAT : " + value << RESET << std::endl;
+
+	printChar(static_cast<int>(floatValue));
+	printInt(static_cast<long>(floatValue));
+	printFloat(static_cast<float>(floatValue));
+	printDouble(static_cast<double>(floatValue));
 }
 
 void	scalarFromDouble(std::string &value)
 {
 	double	doubleValue;
 
-	doubleValue = std::atof(value.c_str());
+	errno = 0;
+	doubleValue = std::strtod(value.c_str(), NULL);
+	if (errno)
+	{
+		std::cerr << RED << "Couldn't convert double : " << std::strerror(errno) << RESET << std::endl;
+		return ;
+	}
+
+	std::cout << CYAN << "Converting DOUBLE : " + value << RESET << std::endl;
+
 	printChar(static_cast<int>(doubleValue));
 	printInt(static_cast<long>(doubleValue));
 	printFloat(static_cast<float>(doubleValue));
 	printDouble(doubleValue);
-}
-
-void	scalarImpossible()
-{
-	std::cout << "char: impossible" << std::endl;
-	std::cout << "int: impossible" << std::endl;
-	std::cout << "float: impossible" << std::endl;
-	std::cout << "double: impossible" << std::endl;
 }
 
 void	ScalarConverter::convert(std::string value)
@@ -140,24 +150,19 @@ void	ScalarConverter::convert(std::string value)
 	switch (idx)
 	{
 		case 0:
-			std::cout << "Will convert from a char" << std::endl;
 			scalarFromChar(value);
 			break ;
 		case 1:
-			std::cout << "Will convert from a int" << std::endl;
 			scalarFromInt(value);
 			break ;
 		case 2:
-			std::cout << "Will convert from a float" << std::endl;
 			scalarFromFloat(value);
 			break ;
 		case 3:
-			std::cout << "Will convert from a double" << std::endl;
 			scalarFromDouble(value);
 			break ;
 		default:
-			std::cout << "Will not convert / impossible" << std::endl;
-			scalarImpossible();
+			std::cout << RED << "Couldn't detect type to convert from" << RESET << std::endl;
 			break ;
 	}
 
