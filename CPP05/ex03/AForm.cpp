@@ -1,6 +1,14 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+#define RESET	"\e[0m"
+#define RED		"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+#define BLUE	"\e[34m"
+#define PURPLE	"\e[35m"
+#define CYAN	"\e[36m"
+
 AForm::AForm(): _isSigned(false), _name("Default"), _requiredSignGrade(150), _requiredExecGrade(150)
 {
 	std::cout << YELLOW << "Successfully created default form" << std::endl;

@@ -1,6 +1,14 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
+#define RESET	"\e[0m"
+#define RED		"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+#define BLUE	"\e[34m"
+#define PURPLE	"\e[35m"
+#define CYAN	"\e[36m"
+
 Bureaucrat::Bureaucrat(void): _name("Default"), _grade(150)
 {
     std::cout << YELLOW "Successfully created Bureaucrat " << _name << RESET << std::endl;

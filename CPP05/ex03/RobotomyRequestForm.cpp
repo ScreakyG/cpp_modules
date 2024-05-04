@@ -3,6 +3,14 @@
 #include <cstdlib>
 #include <ctime>
 
+#define RESET	"\e[0m"
+#define RED		"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+#define BLUE	"\e[34m"
+#define PURPLE	"\e[35m"
+#define CYAN	"\e[36m"
+
 RobotomyRequestForm::RobotomyRequestForm(): AForm("Robotomy", 72, 45), _target("Default")
 {
 	std::cout << YELLOW << "RobotomyRequestForm default constructor called" << RESET << std::endl;

@@ -2,6 +2,14 @@
 #include "Bureaucrat.hpp"
 #include <fstream>
 
+#define RESET	"\e[0m"
+#define RED		"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+#define BLUE	"\e[34m"
+#define PURPLE	"\e[35m"
+#define CYAN	"\e[36m"
+
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("Shruberry", 145, 137), _target("Default")
 {
 	std::cout << YELLOW << "ShrubberyCreationForm default constructor called" << RESET << std::endl;

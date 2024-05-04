@@ -1,6 +1,14 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
+#define RESET	"\e[0m"
+#define RED		"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+#define BLUE	"\e[34m"
+#define PURPLE	"\e[35m"
+#define CYAN	"\e[36m"
+
 PresidentialPardonForm::PresidentialPardonForm(): AForm("Presidential Pardon", 25, 5), _target("Default")
 {
 	std::cout << YELLOW << "PresidentialPardonForm default constructor called" << RESET << std::endl;
