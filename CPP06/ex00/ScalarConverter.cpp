@@ -52,22 +52,23 @@ void	printInt(long nb)
 	if (nb > INT_MAX || nb < INT_MIN)
 		std::cout << "int: impossible" << std::endl;
 	else
-		std::cout << "int: " << nb << std::endl;
+		std::cout << "int: " << static_cast<int>(nb) << std::endl;
 }
 
 void	printFloat(float nb)
 {
-	if (nb > FLT_MAX || nb < -FLT_MAX)
-		std::cout << "float: impossible" << std::endl;
-	else
-		std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
+	// if (nb > FLT_MAX || nb < -FLT_MAX)
+	// 	std::cout << "float: impossible" << std::endl;
+	// else
+		std::cout << "float: " << nb << "f" << std::endl;
+		//std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
 }
 
 void	printDouble(double nb)
 {
-	if (nb > DBL_MAX || nb < -DBL_MAX)
-		std::cout << "double: impossible" << std::endl;
-	else
+	// if (nb > DBL_MAX || nb < -DBL_MAX)
+	// 	std::cout << "double: impossible" << std::endl;
+	// else
 		std::cout << "double: " << nb << std::endl;
 }
 
@@ -97,7 +98,7 @@ void	scalarFromFloat(std::string &value)
 
 	doubleValue = std::atof(value.c_str());
 	printChar(static_cast<int>(doubleValue));
-	printInt(static_cast<int>(doubleValue));
+	printInt(static_cast<long>(doubleValue));
 	printFloat(static_cast<float>(doubleValue));
 	printDouble(doubleValue);
 }
@@ -108,7 +109,7 @@ void	scalarFromDouble(std::string &value)
 
 	doubleValue = std::atof(value.c_str());
 	printChar(static_cast<int>(doubleValue));
-	printInt(static_cast<int>(doubleValue));
+	printInt(static_cast<long>(doubleValue));
 	printFloat(static_cast<float>(doubleValue));
 	printDouble(doubleValue);
 }
@@ -165,9 +166,12 @@ void	ScalarConverter::convert(std::string value)
 bool	isInt(std::string &value)
 {
 	char	*endptr;
+	long	longValue;
 
-	std::strtol(value.c_str(), &endptr, 0);
+	longValue = std::strtol(value.c_str(), &endptr, 0);
 	if (endptr == value.c_str() || *endptr != '\0')
+		return (false);
+	if (longValue < INT_MIN || longValue > INT_MAX)
 		return (false);
 	return (true);
 }
