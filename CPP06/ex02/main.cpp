@@ -5,7 +5,7 @@
 #include <iostream>
 #include <exception>
 #include <cstdlib>
-#include <time.h>
+#include <ctime>
 
 Base	*generator(void)
 {
