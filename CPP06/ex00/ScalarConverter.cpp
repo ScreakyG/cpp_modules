@@ -43,7 +43,7 @@ void	printChar(long character)
 {
 	if (character > CHAR_MAX || character < CHAR_MIN)
 		std::cout << "char: impossible" << std::endl;
-	else if (std::isprint(character))
+	else if (std::isprint(static_cast<int>(character)))
 		std::cout << "char: " << "'" << static_cast<char>(character) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
