@@ -39,11 +39,11 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &rhs)
 	return (*this);
 }
 
-void	printChar(long character)
+void	printChar(int character)
 {
 	if (character > CHAR_MAX || character < CHAR_MIN)
 		std::cout << "char: impossible" << std::endl;
-	else if (std::isprint(static_cast<int>(character)))
+	else if (std::isprint(character))
 		std::cout << "char: " << "'" << static_cast<char>(character) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
@@ -86,7 +86,7 @@ void	scalarFromInt(std::string &value)
 
 	std::cout << CYAN << "Converting INT : " + value << RESET << std::endl;
 
-	printChar(intNb);
+	printChar(static_cast<int>(intNb));
 	printInt(intNb);
 	printFloat(static_cast<float>(intNb));
 	printDouble(static_cast<double>(intNb));
