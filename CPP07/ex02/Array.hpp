@@ -50,20 +50,11 @@ class Array
 			return (*this);
 		};
 
-		Array<T>& operator[](int idx)
+		T& operator[](unsigned int idx)
 		{
-			try
-			{
-				if (idx < 0 || idx >= this->_size)
-					throw Array::InvalidIndex();
-				else
-					std::cout << this->_content[idx] << std::endl;
-			}
-			catch (std::exception &e)
-			{
-				std::cerr << e.what() << std::endl;
-			}
-			return (*this);
+			if (idx >= this->_size)
+				throw Array::InvalidIndex();
+			return (this->_content[idx]);
 		};
 		unsigned int	size(void) {return (this->_size);};
 

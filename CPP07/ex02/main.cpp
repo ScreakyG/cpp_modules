@@ -8,7 +8,12 @@ int main(void)
 	std::cout << "Array a size = " << a.size() << std::endl;
 	std::cout << "Array b size = " << b.size() << std::endl;
 
-	b = a;
-
-	std::cout << "Array b size = " << a.size() << std::endl;
+	try
+	{
+		std::cout << b[5] << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what();
+	}
 }
