@@ -16,8 +16,6 @@ class Array
 		Array<T>(unsigned int size): _content(new T[size]), _size(size) // Unsigned int constructor
 		{
 			std::cout << "Array with size constructor called" << std::endl;
-			for (unsigned int idx = 0; idx < size; idx++)
-				_content[idx] = idx;
 		};
 
 		Array<T>(const Array<T> &src): _content(new T[src._size]), _size(src._size) // Copy constructor
@@ -56,7 +54,7 @@ class Array
 				throw Array::InvalidIndex();
 			return (this->_content[idx]);
 		};
-		unsigned int	size(void) {return (this->_size);};
+		unsigned int	size(void) const {return (this->_size);};
 
 		class InvalidIndex : public std::exception
 		{

@@ -2,18 +2,24 @@
 
 int main(void)
 {
-	Array<int> a;
-	Array<int> b(10);
-
-	std::cout << "Array a size = " << a.size() << std::endl;
-	std::cout << "Array b size = " << b.size() << std::endl;
-
+	Array<char> str(5);
+	str[0] = 'S';
+	str[1] = 'a';
+	str[2] = 'l';
+	str[3] = 'u';
+	str[4] = 't';
 	try
 	{
-		std::cout << b[5] << std::endl;
+		str[5] = '\0';
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << e.what();
+		std::cout << e.what();
 	}
+
+	for (unsigned int idx = 0; idx < str.size(); idx++)
+	{
+		std::cout << str[idx] << std::endl;
+	}
+
 }
