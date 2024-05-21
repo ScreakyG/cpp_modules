@@ -67,4 +67,12 @@ class Array
 		unsigned int	_size;
 };
 
+template <typename T>
+std::ostream& operator<<(std::ostream &os, Array<T> &ref)
+{
+	for(unsigned int idx = 0; idx < ref.size(); idx++)
+		os << "[" << ref[idx] << "]";
+	return (os);
+}
+
 #endif
