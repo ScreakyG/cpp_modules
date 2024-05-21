@@ -8,53 +8,15 @@ template <typename T>
 class Array
 {
 	public:
-		Array<T>(void): _content(NULL), _size(0) // Default constructor
-		{
-			std::cout << "Array default constructor called" << std::endl;
-		};
+		Array(void); // Default constructor.
+		Array(unsigned int size); // Size constructor.
+		Array(const Array<T> &src); // Copy constructor.
+		~Array(void); // Destructor.
 
-		Array<T>(unsigned int size): _content(new T[size]), _size(size) // Unsigned int constructor
-		{
-			std::cout << "Array with size constructor called" << std::endl;
-		};
+		Array& operator=(const Array<T> &rhs); // Assignement operator.
+		T& operator[](unsigned int idx);
 
-		Array<T>(const Array<T> &src): _content(new T[src._size]), _size(src._size) // Copy constructor
-		{
-			std::cout << "Array copy constructor called" << std::endl;
-			*this = src;
-		}
-
-		~Array<T>(void) // Destructor
-		{
-			std::cout << "Array destructor called" << std::endl;
-			if (_content)
-				delete[] _content;
-		};
-
-		Array<T>& operator =(const Array<T> &rhs)
-		{
-			std::cout << "Array assignement operator called" << std::endl;
-			if (this != &rhs)
-			{
-				if (this->_size != rhs._size)
-				{
-					delete[] this->_content;
-					this->_size = rhs._size;
-					this->_content = new T[this->_size];
-				}
-				for (unsigned int idx = 0; idx < this->_size; idx++)
-					this->_content[idx] = rhs._content[idx];
-			}
-			return (*this);
-		};
-
-		T& operator[](unsigned int idx)
-		{
-			if (idx >= this->_size)
-				throw Array::InvalidIndex();
-			return (this->_content[idx]);
-		};
-		unsigned int	size(void) const {return (this->_size);};
+		unsigned int	size(void) const;
 
 		class InvalidIndex : public std::exception
 		{
@@ -68,11 +30,8 @@ class Array
 };
 
 template <typename T>
-std::ostream& operator<<(std::ostream &os, Array<T> &ref)
-{
-	for(unsigned int idx = 0; idx < ref.size(); idx++)
-		os << "[" << ref[idx] << "]";
-	return (os);
-}
+std::ostream& operator<<(std::ostream &os, Array<T> &ref);
+
+#include "Array.tpp"
 
 #endif

@@ -95,7 +95,7 @@ void	testsArrayDouble(void)
 
 void	testsArrayStrings(void)
 {
-	std::cout << "<-----ARRAY DOUBLE----->" << std::endl;
+	std::cout << "<-----ARRAY STRINGS----->" << std::endl;
 
 	Array<std::string> array_empty;
 
