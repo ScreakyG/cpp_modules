@@ -3,7 +3,7 @@
 
 const char* valueNotFound::what() const throw()
 {
-	return ("Value not found in container");
+	return (RED "Value not found in container" RESET);
 }
 
 template<typename T>
@@ -14,6 +14,6 @@ typename T::const_iterator	easyfind(const T &intContainer, const int &toFind)
 		it = std::find(intContainer.begin(), intContainer.end(), toFind);
 		if (it == intContainer.end())
 			throw valueNotFound();
-		std::cout << "Found value" << std::endl;
+		std::cout << GREEN "Found value " << toFind << RESET << std::endl;
 		return (it);
 }
