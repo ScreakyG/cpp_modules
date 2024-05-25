@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <deque>
+#include <list>
 #include <exception>
 
 #define RESET	"\e[0m"

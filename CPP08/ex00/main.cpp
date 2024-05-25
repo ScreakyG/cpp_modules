@@ -31,7 +31,7 @@ void	vectorTests(void)
 
 void	dequeTests(void)
 {
-	std::cout << CYAN "<-----ARRAY TESTS----->" RESET << std::endl;
+	std::cout << CYAN "<-----DEQUE TESTS----->" RESET << std::endl;
 
 	std::deque<int>					deque;
 	std::deque<int>::const_iterator	it;
@@ -56,8 +56,37 @@ void	dequeTests(void)
 	std::cout << CYAN "<---------------------->" RESET << std::endl;
 }
 
+void	listTests(void)
+{
+	std::cout << CYAN "<-----LIST TESTS----->" RESET << std::endl;
+
+	std::list<int>					list;
+	std::list<int>::const_iterator	it;
+
+	try
+	{
+		list.push_back(10);
+		list.push_front(100);
+		list.push_back(1000);
+
+		for (it = list.begin(); it != list.end(); it++)
+			std::cout << "[" << *it << "]";
+		std::cout << "\n";
+
+		it = easyfind(list, 100);
+		std::cout << "Iterator pointing at value " << *it << std::endl;
+		it = easyfind(list, 0);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << CYAN "<---------------------->" RESET << std::endl;
+}
+
 int main(void)
 {
 	vectorTests();
 	dequeTests();
+	listTests();
 }
