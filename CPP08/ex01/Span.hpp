@@ -14,6 +14,7 @@ class Span
 
 		void addNumber(int nb);
 		unsigned int shortestSpan();
+		unsigned int longestSpan();
 
 		void printSpan();
 

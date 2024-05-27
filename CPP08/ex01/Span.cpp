@@ -58,6 +58,14 @@ unsigned int Span::shortestSpan()
 	return (lowestDif);
 }
 
+unsigned int Span::longestSpan()
+{
+	if (_currentSize <= 1)
+		throw Span::NotEnoughNumbers();
+	std::sort(_array, _array + _currentSize);
+	return (static_cast<long>(_array[_currentSize - 1] - static_cast<long>(_array[0])));
+}
+
 void Span::printSpan()
 {
 	for (unsigned int idx = 0; idx < _maxSize; idx++)
@@ -72,6 +80,6 @@ const char* Span::SpanIsFull::what() const throw()
 
 const char* Span::NotEnoughNumbers::what() const throw()
 {
-	return ("Couldn't calculate distance because there is only not enough numbers");
+	return ("Couldn't calculate distance because there is not enough numbers");
 }
 
