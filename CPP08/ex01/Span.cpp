@@ -35,12 +35,22 @@ Span::~Span()
 	std::cout << "Span destructor called" << std::endl;
 }
 
+void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	unsigned int	distance = std::distance(begin, end);
+
+	if (distance > (this->_maxSize - this->_array.size()))
+		throw Span::SpanIsFull();
+	if (distance > 0)
+		_array.insert(_array.end(), begin, end);
+}
+
 void Span::addNumber(int nb)
 {
 	if (_array.size() >= _maxSize)
 		throw Span::SpanIsFull();
 	_array.push_back(nb);
-	std::cout << "Added number " << nb << " to span" << std::endl;
+	//std::cout << "Added number " << nb << " to span" << std::endl;
 }
 
 unsigned int Span::shortestSpan()
@@ -72,9 +82,14 @@ unsigned int Span::longestSpan()
 
 void Span::printSpan()
 {
+	std::cout << "<------SPAN INFOS------>" << std::endl;
+
 	for (std::vector<int>::iterator it = _array.begin(); it != _array.end(); it++)
 		std::cout << "[" << *it << "]";
 	std::cout << "\n";
+	std::cout << "Size = " << _array.size() << ", Capacity = " << _maxSize << std::endl;
+
+	std::cout << "<---------------------->" << std::endl;
 }
 
 const char* Span::SpanIsFull::what() const throw()

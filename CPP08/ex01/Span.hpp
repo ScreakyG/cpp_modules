@@ -13,9 +13,10 @@ class Span
 
 		Span& operator=(const Span &rhs); // Assignement operator.
 
-		void addNumber(int nb);
-		unsigned int shortestSpan();
-		unsigned int longestSpan();
+		void 			addNumber(int nb);
+		unsigned int	shortestSpan();
+		unsigned int	longestSpan();
+		void			addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 
 		void printSpan();
 
