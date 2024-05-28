@@ -1,6 +1,7 @@
 #pragma once
 
 #include <exception>
+#include <vector>
 
 class Span
 {
@@ -30,7 +31,6 @@ class Span
 				const char* what() const throw();
 		};
 	private:
-		unsigned int	_maxSize;
-		unsigned int	_currentSize;
-		int*			_array;
+		std::vector<int>	_array;
+		unsigned int		_maxSize;
 };

@@ -3,18 +3,17 @@
 #include <algorithm>
 #include <limits.h>
 
-Span::Span(void): _maxSize(0), _currentSize(0), _array(NULL)
+Span::Span(void): _array(),_maxSize(0)
 {
 	std::cout << "Span default constructor called" << std::endl;
 }
 
-Span::Span(unsigned int N): _maxSize(N), _currentSize(0)
+Span::Span(unsigned int N): _array(), _maxSize(N)
 {
 	std::cout << "Span size constructor called" << std::endl;
-	_array = new int[_maxSize]();
 }
 
-Span::Span(const Span &rhs): _maxSize(rhs._maxSize), _currentSize(rhs._currentSize)
+Span::Span(const Span &rhs)
 {
 	std::cout << "Span copy constructor called" << std::endl;
 	*this = rhs;
@@ -23,53 +22,58 @@ Span::Span(const Span &rhs): _maxSize(rhs._maxSize), _currentSize(rhs._currentSi
 Span& Span::operator=(const Span &rhs)
 {
 	std::cout << "Span assignement operator called" << std::endl;
-	(void)rhs;
+	if (this != &rhs)
+	{
+		this->_maxSize = rhs._maxSize;
+		this->_array = rhs._array;
+	}
 	return (*this);
 }
 
 Span::~Span()
 {
 	std::cout << "Span destructor called" << std::endl;
-	delete[] _array;
 }
 
 void Span::addNumber(int nb)
 {
-	if (_currentSize >= _maxSize)
+	if (_array.size() >= _maxSize)
 		throw Span::SpanIsFull();
-	_array[_currentSize] = nb;
-	_currentSize++;
+	_array.push_back(nb);
 	std::cout << "Added number " << nb << " to span" << std::endl;
 }
 
 unsigned int Span::shortestSpan()
 {
 	long	lowestDif = INT_MAX;
+	std::vector<int>	temp(_array);
 
-	if (_currentSize <= 1)
+	if (_array.size() <= 1)
 		throw Span::NotEnoughNumbers();
-	std::sort(_array, _array+_currentSize);
-	for (unsigned int idx = 0; idx < _currentSize - 1; idx++)
+	std::sort(temp.begin(), temp.end());
+	for (std::vector<int>::iterator it = temp.begin(); it != temp.end() - 1; it++)
 	{
-		long	distance = static_cast<long>(_array[idx + 1]) - static_cast<long>(_array[idx]);
+		long	distance = *(it + 1) - *it;
 		if (distance < lowestDif)
-			lowestDif = static_cast<long>(_array[idx + 1]) - static_cast<long>(_array[idx]);
+			lowestDif = *(it + 1) - *it;
 	}
 	return (lowestDif);
 }
 
 unsigned int Span::longestSpan()
 {
-	if (_currentSize <= 1)
+	std::vector<int>	temp(_array);
+
+	if (_array.size() <= 1)
 		throw Span::NotEnoughNumbers();
-	std::sort(_array, _array + _currentSize);
-	return (static_cast<long>(_array[_currentSize - 1] - static_cast<long>(_array[0])));
+	std::sort(temp.begin(), temp.end());
+	return (*(temp.end() - 1) - *(temp.begin()));
 }
 
 void Span::printSpan()
 {
-	for (unsigned int idx = 0; idx < _maxSize; idx++)
-		std::cout << "[" << _array[idx] << "]";
+	for (std::vector<int>::iterator it = _array.begin(); it != _array.end(); it++)
+		std::cout << "[" << *it << "]";
 	std::cout << "\n";
 }
 
