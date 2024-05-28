@@ -12,12 +12,10 @@ void addRandomRange(Span &obj, unsigned int size)
 
 int	main(void)
 {
-	Span sp = Span(6);
+	Span sp = Span(10000);
 	try
 	{
-		sp.addNumber(100);
-		sp.addNumber(200);
-		addRandomRange(sp, 5);
+		addRandomRange(sp, 10000);
 		sp.printSpan();
 	}
 	catch (const std::exception &e)
