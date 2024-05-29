@@ -12,7 +12,7 @@
 #define PURPLE	"\e[35m"
 #define CYAN	"\e[36m"
 
-class Data;
+struct Data;
 
 class Serializer
 {

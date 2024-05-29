@@ -15,7 +15,7 @@ int	main(void)
 	Span sp = Span(10000);
 	try
 	{
-		addRandomRange(sp, 10000);
+		addRandomRange(sp, 10);
 		sp.printSpan();
 	}
 	catch (const std::exception &e)
