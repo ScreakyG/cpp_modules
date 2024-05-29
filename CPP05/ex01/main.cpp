@@ -57,6 +57,18 @@ int main(void)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
+	try
+	{
+		Bureaucrat	boss("Boss", 1);
+		Form		base("Base", 100, 100);
+
+		base.beSigned(boss);
+		boss.signForm(base);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
 }
 
 
