@@ -1,5 +1,5 @@
 #ifndef SHRUBBERY_FORM
-#define SHRUBERRY_FORM
+#define SHRUBBERY_FORM
 
 #include "AForm.hpp"
 
