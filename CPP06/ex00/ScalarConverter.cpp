@@ -185,6 +185,9 @@ bool	isFloat(std::string &value)
 {
 	char	*endptr;
 
+	if (value == "-nanf")
+		return (false);
+
 	std::strtof(value.c_str(), &endptr);
 	if (endptr == value.c_str() || *endptr != 'f')
 		return (false);
@@ -196,6 +199,9 @@ bool	isFloat(std::string &value)
 bool	isDouble(std::string &value)
 {
 	char	*endptr;
+
+	if (value == "-nan")
+		return (false);
 
 	std::strtod(value.c_str(), &endptr);
 	if (endptr == value.c_str() || *endptr != '\0')
