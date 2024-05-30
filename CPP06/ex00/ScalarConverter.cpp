@@ -59,8 +59,12 @@ void	printInt(long nb)
 
 void	printFloat(float nb)
 {
-	std::cout << "float: " << nb << "f" << std::endl;
-	//std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
+	//std::cout << "float: " << nb << "f" << std::endl;
+
+	if (nb == static_cast<int>(nb))
+		std::cout << "float: " << std::fixed << std::setprecision(1) << nb  << "f" << std::endl;
+	else
+		std::cout << "float: " << nb << "f" << std::endl;
 }
 
 void	printDouble(double nb)
