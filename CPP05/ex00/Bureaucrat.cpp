@@ -36,7 +36,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._gr
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& src)
 {
 	if (this != &src)
+    {
         this->_grade = src._grade;
+        //const_cast<std::string&>(this->_name) = src._name; //If you want to copy const value.
+    }
     std::cout << YELLOW "Successfully copied Bureaucrat from assignement operator" RESET << std::endl;
 	return (*this);
 }
