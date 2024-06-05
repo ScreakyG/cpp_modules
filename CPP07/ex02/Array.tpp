@@ -7,9 +7,20 @@ Array<T>::Array(void): _content(NULL), _size(0)
 };
 
 template <typename T>
-Array<T>::Array(unsigned int size): _content(new T[size]()), _size(size) // Unsigned int constructor
+Array<T>::Array(unsigned int size) // Unsigned int constructor
 {
 	std::cout << "Array with size constructor called" << std::endl;
+	try
+	{
+		_size = size;
+		_content = new T[size]();
+	}
+	catch (std::bad_alloc &e)
+	{
+		std::cout << "Allocation failed" << std::endl;
+		_size = 0;
+		_content = NULL;
+	}
 };
 
 template <typename T>
