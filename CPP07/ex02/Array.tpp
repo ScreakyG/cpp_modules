@@ -1,9 +1,20 @@
 #include "Array.hpp"
 
 template <typename T>
-Array<T>::Array(void): _content(NULL), _size(0)
+Array<T>::Array(void)
 {
 	std::cout << "Array default constructor called" << std::endl;
+	try
+	{
+		_size = 0;
+		_content = new T[_size]();
+	}
+	catch (std::bad_alloc &e)
+	{
+		std::cout << "Allocation failed" << std::endl;
+		_size = 0;
+		_content = NULL;
+	}
 };
 
 template <typename T>
