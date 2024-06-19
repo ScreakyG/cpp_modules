@@ -24,15 +24,13 @@ static std::map<std::string, float> importValues(std::ifstream &file)
 	{
 		keyValue = line.substr(0, line.find(","));
 		mappedValue = line.substr(line.find(",") + 1);
-		dataBase.insert(std::pair<std::string, float>(keyValue, std::atof(mappedValue.c_str())));
+		dataBase[keyValue] = std::atof(mappedValue.c_str());
 	}
-
 	std::map<std::string, float>::iterator it;
 	for (it = dataBase.begin(); it != dataBase.end(); it++)
 		std::cout << it->first << " " << it->second <<  std::endl;
 
-	return dataBase;
-
+	return (dataBase);
 }
 
 void	BitcoinExchange::ImportDataBase(void)
@@ -47,8 +45,6 @@ void	BitcoinExchange::ImportDataBase(void)
 		myfile.open("data.csv");
 		if (myfile.is_open())
 		{
-			// while (std::getline(myfile, line))
-			// 	std::cout << line << "\n";
 			dataBase = importValues(myfile);
 			myfile.close();
 		}
