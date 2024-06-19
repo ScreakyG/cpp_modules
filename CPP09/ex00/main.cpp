@@ -1,6 +1,11 @@
 #include "BitcoinExchange.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
-	BitcoinExchange::ImportDataBase();
+	if (argc == 2)
+	{
+		BitcoinExchange::ImportDataBase(argv[1]);
+	}
+	else
+		std::cout << "Usage : ./btc 'input.txt'" << std::endl;
 }

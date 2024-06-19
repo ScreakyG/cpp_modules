@@ -4,12 +4,13 @@
 #include <exception>
 #include <fstream>
 #include <map>
+#include <string>
 
 class BitcoinExchange
 {
 	public:
 		~BitcoinExchange();
-		static void ImportDataBase(void);
+		static void ImportDataBase(char *input);
 	private:
 		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &src);
