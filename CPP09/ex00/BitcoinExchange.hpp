@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+#include <sstream>
+
 #define RESET	"\e[0m"
 #define RED		"\e[31m"
 #define GREEN	"\e[32m"

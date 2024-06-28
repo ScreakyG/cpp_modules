@@ -12,6 +12,47 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 	return (*this);
 }
 
+static std::string trim(const std::string& str,
+                 const std::string& whitespace)
+{
+    const std::string::size_type strBegin = str.find_first_not_of(whitespace);
+    if (strBegin == std::string::npos)
+        return "";
+
+    const std::string::size_type strEnd = str.find_last_not_of(whitespace);
+    const std::string::size_type strRange = strEnd - strBegin + 1;
+
+    return str.substr(strBegin, strRange);
+}
+
+static void verifyValue(std::string &value)
+{
+	double	valueDouble;
+	char	*endptr;
+
+	if (value.empty())
+		throw std::runtime_error("invalid value => no value.");
+	valueDouble = std::strtod(value.c_str(), &endptr);
+	if (*endptr != '\0')
+		throw std::runtime_error("invalid value => " + value);
+	if (valueDouble < 0)
+		throw std::runtime_error("not a positive number.");
+	if (valueDouble > 1000)
+		throw std::runtime_error("too large a number.");
+}
+
+static void verifyDate(std::string &date)
+{
+	std::tm				tm = {};
+	std::istringstream	ss(date);
+
+	ss >> std::get_time(&tm, "%Y-%m-%d");
+	if (ss.fail() || !ss.eof())
+		throw std::runtime_error("invalid date => " + date);
+	//std::cout << tm.tm_year + 1900 << " / " << tm.tm_mon + 1 << " / " << tm.tm_mday << std::endl;
+
+}
+
 static std::map<std::string, float> importValues(std::ifstream &file)
 {
 	std::map<std::string, float>	dataBase;
@@ -48,7 +89,7 @@ static void	printConversion(std::map<std::string, float> &dataBase,std::string &
 	it = dataBase.find(date);
 	if (it != dataBase.end())
 		std::cout << date << " => " << bitcoinAmount << " = " << dataBase[date] * bitcoinAmount << std::endl;
-	else // CHANGER POUR TROUVER LA DATE LA PLUS PROCHE
+	else
 		return ;
 		// getClosestDate()
 		//std::cout << "Couldnt find a matching key" << std::endl;
@@ -58,15 +99,18 @@ static void	getDateAndValue(std::string &date, std::string &value, std::string &
 {
 	std::size_t	found = line.find("|");
 	if (found == std::string::npos)
-		std::cout << "Error: bad input => " << line << std::endl;
+		throw std::runtime_error("bad input, missing '|' => " + line);
 	else
 	{
-		date = line.substr(0, found - 1);
-		// TRIM LES WHITESPACES
-		// VERIFIER DATE VALIDE
-		value = line.substr(found + 2);
-		// TRIM LES WHITESPACES
-		// VERIFIER VALUE
+		date = line.substr(0, found);
+		date = trim(date, " \t");
+		verifyDate(date);
+
+		if (found + 1 >= line.size())
+			throw std::runtime_error("invalid value => no value.");
+		value = line.substr(found + 1);
+		value = trim(value, " \t");
+		verifyValue(value);
 	}
 }
 
@@ -87,8 +131,15 @@ static void	convert(std::map<std::string, float> &dataBase, char *input)
 		{
 			if (line == "date | value" || line.empty())
 				continue;
-			getDateAndValue(date, value, line);
-			printConversion(dataBase, date, value);
+			try
+			{
+				getDateAndValue(date, value, line);
+				printConversion(dataBase, date, value);
+			}
+			catch (const std::exception &e)
+			{
+				std::cout << "Error" << " : " << e.what() << std::endl;
+			}
 		}
 		inputFile.close();
 	}
@@ -118,7 +169,6 @@ void	BitcoinExchange::ImportDataBase(char *input)
 	}
 	catch (std::exception &e)
 	{
-		std::cerr << RED <<  "Error" << " : " << e.what() << RESET << std::endl;
+		std::cout << RED <<  "Error" << " : " << e.what() << RESET << std::endl;
 	}
-	(void)input;
 }
