@@ -89,10 +89,14 @@ static void	printConversion(std::map<std::string, float> &dataBase,std::string &
 	it = dataBase.find(date);
 	if (it != dataBase.end())
 		std::cout << date << " => " << bitcoinAmount << " = " << dataBase[date] * bitcoinAmount << std::endl;
-	else
-		return ;
-		// getClosestDate()
-		//std::cout << "Couldnt find a matching key" << std::endl;
+	else // Find closest date.
+	{
+		it = dataBase.upper_bound(date);
+		if (it == dataBase.begin())
+			throw std::runtime_error("no reference for this date");
+		it--;
+		std::cout << date << " => " << bitcoinAmount << " = " << it->second * bitcoinAmount << std::endl;
+	}
 }
 
 static void	getDateAndValue(std::string &date, std::string &value, std::string &line)
