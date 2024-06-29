@@ -161,7 +161,7 @@ void	BitcoinExchange::ImportDataBase(char *input)
 
 	try
 	{
-		dataBaseCsv.open("data_tests.csv");
+		dataBaseCsv.open("data.csv");
 		if (dataBaseCsv.is_open())
 		{
 			dataBase = importValues(dataBaseCsv);
