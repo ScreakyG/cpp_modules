@@ -41,16 +41,21 @@ static void verifyValue(std::string &value)
 		throw std::runtime_error("too large a number.");
 }
 
-static void verifyDate(std::string &date)
+static void verifyDate(std::string &date, std::map<std::string, float> &map)
 {
 	std::tm				tm = {};
+	std::tm				tmDatabase = {};
 	std::istringstream	ss(date);
+	std::istringstream	ssDatabase(map.begin()->first);
 
 	ss >> std::get_time(&tm, "%Y-%m-%d");
 	if (ss.fail() || !ss.eof())
 		throw std::runtime_error("invalid date => " + date);
 	//std::cout << tm.tm_year + 1900 << " / " << tm.tm_mon + 1 << " / " << tm.tm_mday << std::endl;
 
+	ss >> std::get_time(&tmDatabase, "%Y-%m-%d");
+	if (tm.tm_year + 1900 < tmDatabase.tm_year + 1900)
+		throw std::runtime_error("no reference found, date too old");
 }
 
 static std::map<std::string, float> importValues(std::ifstream &file)
@@ -93,13 +98,13 @@ static void	printConversion(std::map<std::string, float> &dataBase,std::string &
 	{
 		it = dataBase.upper_bound(date);
 		if (it == dataBase.begin())
-			throw std::runtime_error("no reference for this date");
+			throw std::runtime_error("no reference found, date too old");
 		it--;
 		std::cout << date << " => " << bitcoinAmount << " = " << it->second * bitcoinAmount << std::endl;
 	}
 }
 
-static void	getDateAndValue(std::string &date, std::string &value, std::string &line)
+static void	getDateAndValue(std::string &date, std::string &value, std::string &line, std::map<std::string, float> &dataBase)
 {
 	std::size_t	found = line.find("|");
 	if (found == std::string::npos)
@@ -108,7 +113,7 @@ static void	getDateAndValue(std::string &date, std::string &value, std::string &
 	{
 		date = line.substr(0, found);
 		date = trim(date, " \t");
-		verifyDate(date);
+		verifyDate(date, dataBase);
 
 		if (found + 1 >= line.size())
 			throw std::runtime_error("invalid value => no value.");
@@ -137,7 +142,7 @@ static void	convert(std::map<std::string, float> &dataBase, char *input)
 				continue;
 			try
 			{
-				getDateAndValue(date, value, line);
+				getDateAndValue(date, value, line, dataBase);
 				printConversion(dataBase, date, value);
 			}
 			catch (const std::exception &e)
