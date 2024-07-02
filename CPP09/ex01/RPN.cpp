@@ -15,49 +15,31 @@ static void	performOperation(std::string &value, std::stack<double> &stack)
 {
 	double	a;
 	double	b;
-	double	result;
 
 	if (stack.size() < 2)
 		throw std::runtime_error("invalid expression");
-	if (value == "+")
-	{
-		a = stack.top();
-		stack.pop();
-		b = stack.top();
-		stack.pop();
+	a = stack.top();
+	stack.pop();
+	b = stack.top();
+	stack.pop();
 
-		result = b + a;
-		stack.push(result);
-	}
-	else if (value == "-")
+	switch(value[0])
 	{
-		a = stack.top();
-		stack.pop();
-		b = stack.top();
-		stack.pop();
-
-		result = b - a;
-		stack.push(result);
-	}
-		else if (value == "*")
-	{
-		a = stack.top();
-		stack.pop();
-		b = stack.top();
-		stack.pop();
-
-		result = b * a;
-		stack.push(result);
-	}
-		else if (value == "/")
-	{
-		a = stack.top();
-		stack.pop();
-		b = stack.top();
-		stack.pop();
-
-		result = b / a;
-		stack.push(result);
+		case '+' :
+			stack.push(b + a);
+			break ;
+		case '-' :
+			stack.push(b - a);
+			break ;
+		case '/' :
+			//verifier division par 0.
+			stack.push(b / a);
+			break ;
+		case '*' :
+			stack.push(b * a);
+			break ;
+		default:
+			throw std::runtime_error("invalid operator detected");
 	}
 }
 
@@ -71,8 +53,8 @@ static bool isValidOperand(std::string &value)
 	operand = std::strtod(value.c_str(), &endptr);
 	if (*endptr != '\0')
 		throw std::runtime_error("invalid expression");
-	if (operand < 0 || operand > 10)
-		throw std::runtime_error("invalid expression");
+	if (operand < 0 || operand > 9)
+		throw std::runtime_error("invalid expression, a operand is > 9 or < 0");
 	return (true);
 }
 
@@ -111,6 +93,8 @@ void RPN::Calculate(char *argv)
 					break ;
 				else if (isOperator(value) == true)
 					performOperation(value, stack);
+				else if (isValidOperand(value))
+					stack.push(std::strtod(value.c_str(), NULL));
 				else
 					throw std::runtime_error("invalid expression");
 			}
