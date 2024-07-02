@@ -17,7 +17,7 @@ clean:
 		rm -rf $(DEPS)
 
 fclean: clean
-		rm -rf $(DEPS)
+		rm -rf $(NAME)
 
 re: fclean all
 
