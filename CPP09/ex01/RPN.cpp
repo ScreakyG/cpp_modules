@@ -95,8 +95,6 @@ void RPN::Calculate(char *argv)
 					performOperation(value, stack);
 				else if (isValidOperand(value))
 					stack.push(std::strtod(value.c_str(), NULL));
-				else
-					throw std::runtime_error("invalid expression");
 			}
 		}
 		if (stack.size() != 1)
