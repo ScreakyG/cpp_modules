@@ -7,5 +7,5 @@ int main(int argc, char **argv)
 		BitcoinExchange::ImportDataBase(argv[1]);
 	}
 	else
-		std::cout << RED"Usage : ./btc 'input.txt'"RESET << std::endl;
+		std::cout << RED "Usage : ./btc 'input.txt'" RESET << std::endl;
 }
