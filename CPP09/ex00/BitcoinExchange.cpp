@@ -48,12 +48,12 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 	std::istringstream	ss(date);
 	std::istringstream	ssDatabase(map.begin()->first);
 
-	ss >> std::get_time(&tm, "%Y-%m-%d");
+	ss >> get_time(&tm, "%Y-%m-%d");
 	if (ss.fail() || !ss.eof())
 		throw std::runtime_error("invalid date => " + date);
 	//std::cout << tm.tm_year + 1900 << " / " << tm.tm_mon + 1 << " / " << tm.tm_mday << std::endl;
 
-	ss >> std::get_time(&tmDatabase, "%Y-%m-%d");
+	ss >> get_time(&tmDatabase, "%Y-%m-%d");
 	if (tm.tm_year + 1900 < tmDatabase.tm_year + 1900)
 		throw std::runtime_error("no reference found, date too old");
 }
@@ -132,7 +132,7 @@ static void	convert(std::map<std::string, float> &dataBase, char *input)
 	std::string		value;
 
 	inputPath = input;
-	inputFile.open(inputPath);
+	inputFile.open(inputPath.c_str());
 	if (inputFile.is_open())
 	{
 		std::cout << GREEN"Input File found = "<< inputPath << RESET << std::endl;

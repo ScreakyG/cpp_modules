@@ -4,8 +4,11 @@
 #include <exception>
 #include <fstream>
 #include <map>
-#include <string>
+#include <cstring>
 #include <cstdlib>
+#include <ctime>
+
+#include <iomanip>
 
 #include <sstream>
 
