@@ -43,19 +43,34 @@ static void verifyValue(std::string &value)
 
 static void verifyDate(std::string &date, std::map<std::string, float> &map)
 {
-	std::tm				tm = {};
-	std::tm				tmDatabase = {};
-	std::istringstream	ss(date);
-	std::istringstream	ssDatabase(map.begin()->first);
+	// std::tm				tm = {};
+	// std::tm				tmDatabase = {};
+	// std::istringstream	ss(date);
+	// std::istringstream	ssDatabase(map.begin()->first);
 
-	ss >> std::get_time(&tm, "%Y-%m-%d");
-	if (ss.fail() || !ss.eof())
+	// ss >> std::get_time(&tm, "%Y-%m-%d");
+	// if (ss.fail() || !ss.eof())
+	// 	throw std::runtime_error("invalid date => " + date);
+	// //std::cout << tm.tm_year + 1900 << " / " << tm.tm_mon + 1 << " / " << tm.tm_mday << std::endl;
+
+	// ss >> std::get_time(&tmDatabase, "%Y-%m-%d");
+	// if (tm.tm_year + 1900 < tmDatabase.tm_year + 1900)
+	// 	throw std::runtime_error("no reference found, date too old");
+
+	int	lowestDate = 0;
+	std::sscanf(map.begin()->first.c_str(), "%d", &lowestDate);
+	int	year, month, day;
+	if (std::sscanf(date.c_str(), "%d-%d-%d", &year, &month, &day) == 3)
+	{
+		if (month < 1 || month > 12)
+			throw std::runtime_error("invalid date => " + date);
+		if (day < 1 || day > 31)
+			throw std::runtime_error("invalid date => " + date);
+		if (year < lowestDate)
+			throw std::runtime_error("no reference found, date too old");
+	}
+	else
 		throw std::runtime_error("invalid date => " + date);
-	//std::cout << tm.tm_year + 1900 << " / " << tm.tm_mon + 1 << " / " << tm.tm_mday << std::endl;
-
-	ss >> std::get_time(&tmDatabase, "%Y-%m-%d");
-	if (tm.tm_year + 1900 < tmDatabase.tm_year + 1900)
-		throw std::runtime_error("no reference found, date too old");
 }
 
 static std::map<std::string, float> importValues(std::ifstream &file)
