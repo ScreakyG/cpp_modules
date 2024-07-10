@@ -25,6 +25,7 @@ void PmergeMe::mergeInsert(char **argv)
 	// 	std::cout << "Argvs Array = " << argv[i] << std::endl;
 
 	parseArgs(argv, vectorNumbers);
+	sort<std::vector<int> >(vectorNumbers);
 
 	for (unsigned int i = 0; i < vectorNumbers.size(); i++)
 		std::cout << vectorNumbers[i] << std::endl;
