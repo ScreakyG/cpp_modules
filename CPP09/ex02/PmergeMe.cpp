@@ -33,6 +33,24 @@ static std::vector<std::pair<int, int> > makePairs(std::vector<int> &array)
 	return (vectorPairs);
 }
 
+static void sortPairsBigValue(std::vector<std::pair<int, int> > &array)
+{
+	std::vector<std::pair<int, int> >::iterator	it = array.begin();
+
+	for (unsigned int step = 1; step < array.size(); step++)
+	{
+		std::pair<int, int>	key(*(it + step));
+		int		j = step - 1;
+
+		while (key.second < (it + j)->second && j >= 0)
+		{
+			(it + (j + 1))->second = (it + j)->second;
+			j--;
+		}
+		(it + (j + 1))->second = key.second;
+	}
+}
+
 static void sortVector(std::vector<int> &array)
 {
 	int									straggler;
@@ -45,12 +63,18 @@ static void sortVector(std::vector<int> &array)
 	}
 	(void)straggler;
 
-	vectorPairs = makePairs(array);
+	// Check if vector is already sorted.
+
+	vectorPairs = makePairs(array); // Create pairs form original array's elements.
 	printPairs(vectorPairs, "Pairing elements : ");
 
-	sortPairsElements(vectorPairs);
-	printPairs(vectorPairs, "Sorting Pairs : ");
-	// Trier les nombres a l'interieur des pairs.
+	sortPairsElements(vectorPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
+	printPairs(vectorPairs, "Sorting inside Pairs : ");
+
+	// Sort pairs by compare their b values;
+
+	sortPairsBigValue(vectorPairs);
+	printPairs(vectorPairs, "After sorting Pairs : ");
 }
 
 void PmergeMe::mergeInsert(char **argv)
@@ -64,5 +88,5 @@ void PmergeMe::mergeInsert(char **argv)
 	printArray<std::vector<int> >(vectorNumbers, "Before : ");
 
 	sortVector(vectorNumbers);
-	printArray<std::vector<int> >(vectorNumbers, "Before : ");
+	// printArray<std::vector<int> >(vectorNumbers, "After : ");
 }
