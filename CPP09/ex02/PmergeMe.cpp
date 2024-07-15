@@ -71,9 +71,7 @@ static void sortVector(std::vector<int> &array)
 	sortPairsElements(vectorPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
 	printPairs(vectorPairs, "Sorting inside Pairs : ");
 
-	// Sort pairs by compare their b values;
-
-	sortPairsBigValue(vectorPairs);
+	sortPairsBigValue(vectorPairs); // Sort pairs by compare their b values in ascending order.
 	printPairs(vectorPairs, "After sorting Pairs : ");
 }
 
