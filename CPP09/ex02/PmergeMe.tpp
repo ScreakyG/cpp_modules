@@ -17,11 +17,11 @@ static void printArray(T& container, const std::string &msg)
 }
 
 template <typename T>
-static void printPairs(T &array)
+static void printPairs(T &array, std::string msg)
 {
 	typename T::iterator it;
 
-	std::cout << PURPLE "Pairing elements : ";
+	std::cout << PURPLE << msg;
 	for (it = array.begin(); it != array.end(); it++)
 	{
 		std::cout << "<";
@@ -33,5 +33,22 @@ static void printPairs(T &array)
 	}
 	std::cout << RESET;
 	std::cout << std::endl;
+}
+
+template <typename T>
+static void sortPairsElements(T &array)
+{
+	typename T::iterator 						it;
+	int											temp;
+
+	for (it = array.begin(); it != array.end(); it++)
+	{
+		if (it->first > it->second)
+		{
+			temp = it->second;
+			it->second = it->first;
+			it->first = temp;
+		}
+	}
 }
 

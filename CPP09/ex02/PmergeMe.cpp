@@ -46,7 +46,11 @@ static void sortVector(std::vector<int> &array)
 	(void)straggler;
 
 	vectorPairs = makePairs(array);
-	printPairs(vectorPairs);
+	printPairs(vectorPairs, "Pairing elements : ");
+
+	sortPairsElements(vectorPairs);
+	printPairs(vectorPairs, "Sorting Pairs : ");
+	// Trier les nombres a l'interieur des pairs.
 }
 
 void PmergeMe::mergeInsert(char **argv)
