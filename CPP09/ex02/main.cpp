@@ -10,9 +10,9 @@ int main(int argc, char **argv)
 		}
 		catch(const std::exception &e)
 		{
-			std::cout << "Error : " << e.what() << std::endl;
+			std::cout << RED "Error : " << e.what() << RESET << std::endl;
 		}
 	}
 	else
-		std::cout << "Usage : './PmergeMe 3 8 9 1 [...]" << std::endl;
+		std::cout << RED "Usage : './PmergeMe 3 8 9 1 [...]" RESET << std::endl;
 }

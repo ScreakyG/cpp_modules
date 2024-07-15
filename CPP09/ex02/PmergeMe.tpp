@@ -1,28 +1,18 @@
 #include "PmergeMe.hpp"
 
 template <typename T>
-static void insertionSort(T& tab, int start, int end)
+static void printArray(T& container, const std::string &msg)
 {
-	for (int i = start + 1; i < end; i++)
+	std::cout << msg;
+	for (unsigned int i = 0; i < container.size(); i++)
 	{
-		int	key = tab[i];
-		int	j = i - 1;
-
-		while (j >= start && tab[j] > key)
+		if (i >=5)
 		{
-			tab[j + 1] = tab[j];
-			j--;
+			std::cout << "[...]";
+			break ;
 		}
-		tab[j + 1] = key;
+		std::cout << container[i] << " ";
 	}
+	std::cout << "\n";
 }
 
-template <typename T>
-static void sort(T& tab)
-{
-	std::cout << "Calling sort function" << std::endl;
-
-	int arrayLen = tab.size();
-	for (int i = 0; i < arrayLen; i += tabsSize)
-		insertionSort<T>(tab, i, std::min(i + tabsSize, arrayLen));
-};
