@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <limits>
 #include <algorithm>
+#include <utility> // Pour les paires.
 
 #define RESET	"\e[0m"
 #define RED		"\e[31m"

@@ -1,23 +1,5 @@
 #include "PmergeMe.hpp"
 
-static void printPairsVector(std::vector<std::pair<int, int> > &array)
-{
-	std::vector<std::pair<int, int> >::iterator it;
-
-	std::cout << PURPLE "Pairing elements : ";
-	for (it = array.begin(); it != array.end(); it++)
-	{
-		std::cout << "<";
-		std::cout << it->first;
-		std::cout << ",";
-		std::cout << it->second;
-		std::cout << ">";
-		std::cout << " ";
-	}
-	std::cout << RESET;
-	std::cout << std::endl;
-}
-
 static void parseArgs(char **argv, std::vector<int> &vector)
 {
 	char				*endptr;
@@ -64,7 +46,7 @@ static void sortVector(std::vector<int> &array)
 	(void)straggler;
 
 	vectorPairs = makePairs(array);
-	printPairsVector(vectorPairs);
+	printPairs(vectorPairs);
 }
 
 void PmergeMe::mergeInsert(char **argv)
