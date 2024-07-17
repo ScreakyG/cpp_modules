@@ -45,10 +45,65 @@ static void sortPairsBigValue(std::vector<std::pair<int, int> > &array)
 		while (key.second < (it + j)->second && j >= 0)
 		{
 			(it + (j + 1))->second = (it + j)->second;
+			(it + (j + 1))->first = (it + j)->first;
 			j--;
 		}
 		(it + (j + 1))->second = key.second;
+		(it + (j + 1))->first = key.first;
 	}
+}
+
+static std::vector<int> createJacobstahlSequence(std::vector<int> &pendChain)
+{
+	std::vector<int>	jacobSequence;
+	unsigned int					jacobIndex = 3;
+	unsigned int					j0 = 1;
+
+	while (jacobIndex <= pendChain.size())
+	{
+		jacobSequence.push_back(jacobIndex);
+		int	nextIndex = jacobIndex + 2 * j0;
+		j0 = jacobIndex;
+		jacobIndex = nextIndex;
+	}
+	return (jacobSequence);
+}
+
+static std::vector<int> createInsertSequence(std::vector<int> &pendChain)
+{
+	int	pendSize = pendChain.size();
+	std::vector<int> indexSequence;
+
+	indexSequence.push_back(1);
+	if (pendSize == 1)
+		return (indexSequence);
+
+	std::vector<int> jacobstahlSequence = createJacobstahlSequence(pendChain);
+	printArray(jacobstahlSequence, CYAN "Jacob index sequence : " RESET);
+	// Rajouter la suite.
+
+	return (indexSequence);
+}
+
+static void createFinalArray(std::vector<std::pair<int, int> > &array, int &straggler)
+{
+	std::vector<std::pair<int, int> >::iterator it;
+	std::vector<int> mainChain;
+	std::vector<int> pendChain;
+
+	for (it = array.begin(); it != array.end(); it++)
+	{
+		mainChain.push_back(it->second);
+		pendChain.push_back(it->first);
+	}
+
+	(void)straggler;
+	printArray(mainChain, GREEN "Main chain : " RESET);
+	printArray(pendChain, YELLOW "Pend chain : " RESET);
+
+	//mainChain.insert(mainChain.begin(), pendChain[0]); // Insert the first element in MainChain since a1 is smaller than b1.
+
+	std::vector<int> indexSequence = createInsertSequence(pendChain);
 }
 
 static void sortVector(std::vector<int> &array)
@@ -61,7 +116,6 @@ static void sortVector(std::vector<int> &array)
 		straggler = array.back();
 		array.pop_back();
 	}
-	(void)straggler;
 
 	// Check if vector is already sorted.
 
@@ -73,6 +127,8 @@ static void sortVector(std::vector<int> &array)
 
 	sortPairsBigValue(vectorPairs); // Sort pairs by compare their b values in ascending order.
 	printPairs(vectorPairs, "After sorting Pairs : ");
+
+	createFinalArray(vectorPairs, straggler);
 }
 
 void PmergeMe::mergeInsert(char **argv)
