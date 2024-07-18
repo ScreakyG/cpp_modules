@@ -55,7 +55,7 @@ static void sortPairsBigValue(std::vector<std::pair<int, int> > &array)
 
 static std::vector<int> createJacobstahlSequence(std::vector<int> &pendChain)
 {
-	std::vector<int>	jacobSequence;
+	std::vector<int>				jacobSequence;
 	unsigned int					jacobIndex = 3;
 	unsigned int					j0 = 1;
 
@@ -66,6 +66,7 @@ static std::vector<int> createJacobstahlSequence(std::vector<int> &pendChain)
 		j0 = jacobIndex;
 		jacobIndex = nextIndex;
 	}
+	printArray(jacobSequence, CYAN "Jacob index sequence : " RESET);
 	return (jacobSequence);
 }
 
@@ -79,9 +80,29 @@ static std::vector<int> createInsertSequence(std::vector<int> &pendChain)
 		return (indexSequence);
 
 	std::vector<int> jacobstahlSequence = createJacobstahlSequence(pendChain);
-	printArray(jacobstahlSequence, CYAN "Jacob index sequence : " RESET);
-	// Rajouter la suite.
 
+	bool	 wasJacobNumber = false;
+	int		i = 1;
+
+	while (i <= pendSize)
+	{
+		if (jacobstahlSequence.size() != 0 && wasJacobNumber == false)
+		{
+			indexSequence.push_back(jacobstahlSequence[0]);
+			jacobstahlSequence.erase(jacobstahlSequence.begin());
+			wasJacobNumber = true;
+			continue ;
+		}
+		std::vector<int>::iterator it = indexSequence.begin();
+		for ( ;it < indexSequence.end(); it++)
+		{
+			if (i == *it)
+				i++;
+		}
+		indexSequence.push_back(i);
+		wasJacobNumber = false;
+		i++;
+	}
 	return (indexSequence);
 }
 
@@ -104,6 +125,14 @@ static void createFinalArray(std::vector<std::pair<int, int> > &array, int &stra
 	//mainChain.insert(mainChain.begin(), pendChain[0]); // Insert the first element in MainChain since a1 is smaller than b1.
 
 	std::vector<int> indexSequence = createInsertSequence(pendChain);
+
+	printArray(indexSequence, CYAN "Index sequence : " RESET);
+	for (unsigned int i = 0; i < indexSequence.size(); i++)
+	{
+		unsigned int indexToInsert = indexSequence[i];
+		unsigned int valueToInsert = pendChain[indexToInsert - 1]; // Because index 1 means case[0].
+		std::cout << "Index to insert = " << indexToInsert << " Value to insert = " << valueToInsert << std::endl;
+	}
 }
 
 static void sortVector(std::vector<int> &array)
