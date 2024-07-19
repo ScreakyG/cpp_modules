@@ -69,42 +69,6 @@ static void sortPairsBigValue(std::vector<std::pair<int, int> > &array)
 // 	return (jacobSequence);
 // }
 
-// static std::vector<int> createInsertSequence(std::vector<int> &pendChain)
-// {
-// 	int	pendSize = pendChain.size();
-// 	std::vector<int> indexSequence;
-
-// 	indexSequence.push_back(1);
-// 	if (pendSize == 1)
-// 		return (indexSequence);
-
-// 	std::vector<int> jacobstahlSequence = createJacobstahlSequence(pendChain);
-
-// 	bool	 wasJacobNumber = false;
-// 	int		i = 1;
-
-// 	while (i <= pendSize)
-// 	{
-// 		if (jacobstahlSequence.size() != 0 && wasJacobNumber == false)
-// 		{
-// 			indexSequence.push_back(jacobstahlSequence[0]);
-// 			jacobstahlSequence.erase(jacobstahlSequence.begin());
-// 			wasJacobNumber = true;
-// 			continue ;
-// 		}
-// 		std::vector<int>::iterator it = indexSequence.begin();
-// 		for ( ;it < indexSequence.end(); it++)
-// 		{
-// 			if (i == *it)
-// 				i++;
-// 		}
-// 		indexSequence.push_back(i);
-// 		wasJacobNumber = false;
-// 		i++;
-// 	}
-// 	return (indexSequence);
-// }
-
 static int jacobsthal(int n)
 {
     if (n == 0)
@@ -116,9 +80,9 @@ static int jacobsthal(int n)
     return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
 }
 
-static std::vector<int> createJacobsthalsSequence_COPY(std::vector<int> &pendChain, std::vector<int> &mainChain)
+static std::vector<int> createJacobsthalsSequence_COPY(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
 {
-	std::vector<int>			jacobsthalSequence;
+	//std::vector<int>			jacobsthalSequence;
 	unsigned long				jacob = 0;
 
 	for (std::size_t i = 2; i < pendChain.size() + mainChain.size(); i++)
@@ -150,16 +114,15 @@ static std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &j
 			jacobsthalIndexed.push_back(jacob);
 		}
 	}
-	jacobsthalIndexed.erase(jacobsthalIndexed.begin()); // Remove the first because we know its always a1.
 	return (jacobsthalIndexed);
 }
 
-static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendChain, std::vector<int> &mainChain)
+static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
 {
-	std::vector<int>			jacobsthalSequence;
+	//std::vector<int>			jacobsthalSequence;
 	std::vector<unsigned long>	jacobsthalIndexed;
 
-	jacobsthalSequence = createJacobsthalsSequence_COPY(pendChain, mainChain);
+	createJacobsthalsSequence_COPY(pendChain, mainChain, jacobsthalSequence);
 	printArray(jacobsthalSequence, RED "Jacob sequence : " RESET);
 
 	jacobsthalIndexed = createJacobIndexedSequence(jacobsthalSequence, pendChain.size());
@@ -168,28 +131,49 @@ static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendCha
 	return (jacobsthalIndexed);
 }
 
-static void createFinalArray(std::vector<std::pair<int, int> > &array, int &straggler)
+static void insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pendChain, std::vector<int> &jacobSequence, std::vector<unsigned long> &indexSequence)
+{
+	(void)jacobSequence;
+	int	lastSize = 0;
+	for (unsigned int i = 0; i < indexSequence.size(); i++)
+	{
+		// Decouper pour ne pas comparer avec toute la mainchain
+		// Chercher a quel batch appartiennent les nombres en fonction des index de jacobsthal.
+		lastSize = mainChain.size();
+		mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.begin() + lastSize, pendChain[indexSequence[i] - 1]), pendChain[indexSequence[i] - 1]);
+	}
+}
+
+static std::vector<int> createFinalArray(std::vector<std::pair<int, int> > &array, int &straggler)
 {
 	std::vector<std::pair<int, int> >::iterator it;
 	std::vector<int> mainChain;
 	std::vector<int> pendChain;
 
-	for (it = array.begin(); it != array.end(); it++)
+	for (it = array.begin(); it != array.end(); it++) // Push bigger value of each pairs to mainChain resulting in a sorted array, and smallers to pend.
 	{
 		mainChain.push_back(it->second);
 		pendChain.push_back(it->first);
 	}
-
 	(void)straggler;
 	printArray(mainChain, GREEN "Main chain : " RESET);
 	printArray(pendChain, YELLOW "Pend chain : " RESET);
 
-	//mainChain.insert(mainChain.begin(), pendChain[0]); // Insert the first element in MainChain since a1 is smaller than b1.
+	if (pendChain.size() > 1)
+	{
+		std::vector<int>		   jacobsthalSequence;
+		std::vector<unsigned long> indexSequence = createInsertSequence(pendChain, mainChain, jacobsthalSequence); // Get the index sorting sequence.
 
-	std::vector<unsigned long> indexSequence = createInsertSequence(pendChain, mainChain);
+		mainChain.insert(mainChain.begin(), pendChain[0]); // Insert the first element in MainChain since a1 is smaller than b1.
+		indexSequence.erase(indexSequence.begin()); // Remove the first index since we pushed it.
+		insertPendIntoMain(mainChain, pendChain, jacobsthalSequence, indexSequence);
+	}
+	else if (pendChain.size() == 1) // Will also protect if the OG array is only 1 number.
+		mainChain.insert(mainChain.begin(), pendChain[0]); // No need to get inserting sequence if only one element to insert.
+	return (mainChain);
 }
 
-static void sortVector(std::vector<int> &array)
+static std::vector<int> sortVector(std::vector<int> &array)
 {
 	int									straggler;
 	std::vector<std::pair<int, int> >	vectorPairs;
@@ -211,16 +195,17 @@ static void sortVector(std::vector<int> &array)
 	sortPairsBigValue(vectorPairs); // Sort pairs by compare their b values in ascending order.
 	printPairs(vectorPairs, "After sorting Pairs : ");
 
-	createFinalArray(vectorPairs, straggler);
+	return (createFinalArray(vectorPairs, straggler));
 }
 
 void PmergeMe::mergeInsert(char **argv)
 {
 	std::vector<int>	vectorNumbers;
+	std::vector<int>	sortedVector;
 
 	parseArgs(argv, vectorNumbers);
 	printArray<std::vector<int> >(vectorNumbers, "Before : ");
 
-	sortVector(vectorNumbers);
-	// printArray<std::vector<int> >(vectorNumbers, "After : ");
+	sortedVector = sortVector(vectorNumbers);
+	printArray<std::vector<int> >(sortedVector, "After : ");
 }
