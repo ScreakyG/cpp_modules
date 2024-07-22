@@ -131,15 +131,28 @@ static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendCha
 	return (jacobsthalIndexed);
 }
 
+static int getBatchNumber(std::vector<int> &jacobSequence, int index)
+{
+
+	for (unsigned int i = 0; i < jacobSequence.size(); i++)
+	{
+		if (jacobSequence[i] >= index && jacobSequence[i - 1] && jacobSequence[i - 1] < index)
+			return (i + 1);
+	}
+	return (-1);
+}
+
 static void insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pendChain, std::vector<int> &jacobSequence, std::vector<unsigned long> &indexSequence)
 {
-	(void)jacobSequence;
-	int	lastSize = 0;
+	size_t	lastSize = 0;
 	for (unsigned int i = 0; i < indexSequence.size(); i++)
 	{
 		// Decouper pour ne pas comparer avec toute la mainchain
 		// Chercher a quel batch appartiennent les nombres en fonction des index de jacobsthal.
-		lastSize = mainChain.size();
+		// Ajouter le stragller a la fin.
+		lastSize = pow(2, getBatchNumber(jacobSequence, indexSequence[i])) - 1;
+		if (lastSize > mainChain.size())
+			lastSize = mainChain.size();
 		mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.begin() + lastSize, pendChain[indexSequence[i] - 1]), pendChain[indexSequence[i] - 1]);
 	}
 }
@@ -170,12 +183,14 @@ static std::vector<int> createFinalArray(std::vector<std::pair<int, int> > &arra
 	}
 	else if (pendChain.size() == 1) // Will also protect if the OG array is only 1 number.
 		mainChain.insert(mainChain.begin(), pendChain[0]); // No need to get inserting sequence if only one element to insert.
+	if (straggler != -1)
+		mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), straggler), straggler);
 	return (mainChain);
 }
 
 static std::vector<int> sortVector(std::vector<int> &array)
 {
-	int									straggler;
+	int									straggler = -1;
 	std::vector<std::pair<int, int> >	vectorPairs;
 
 	if (array.size() % 2 != 0)
@@ -198,6 +213,19 @@ static std::vector<int> sortVector(std::vector<int> &array)
 	return (createFinalArray(vectorPairs, straggler));
 }
 
+static void isSorted(std::vector<int> &array)
+{
+	for (size_t i = 1; i < array.size(); i++)
+	{
+		if (array[i] < array[i - 1])
+		{
+			std::cout << RED << "Array is not sorted" << RESET << std::endl;
+			return ;
+		}
+	}
+	std::cout << GREEN << "Array is sorted" << RESET << std::endl;
+}
+
 void PmergeMe::mergeInsert(char **argv)
 {
 	std::vector<int>	vectorNumbers;
@@ -208,4 +236,7 @@ void PmergeMe::mergeInsert(char **argv)
 
 	sortedVector = sortVector(vectorNumbers);
 	printArray<std::vector<int> >(sortedVector, "After : ");
+	isSorted (sortedVector);
+
+
 }
