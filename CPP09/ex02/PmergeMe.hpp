@@ -1,7 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <sys/time.h>
 #include <cmath>
+#include <iomanip>
 #include <vector>
 #include <cstdlib>
 #include <limits>

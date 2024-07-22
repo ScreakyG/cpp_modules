@@ -228,15 +228,25 @@ static void isSorted(std::vector<int> &array)
 
 void PmergeMe::mergeInsert(char **argv)
 {
+	timeval	start;
+	timeval	end;
+	double	executionTime;
+
 	std::vector<int>	vectorNumbers;
 	std::vector<int>	sortedVector;
 
+	gettimeofday(&start, NULL);
 	parseArgs(argv, vectorNumbers);
 	printArray<std::vector<int> >(vectorNumbers, "Before : ");
 
 	sortedVector = sortVector(vectorNumbers);
+	gettimeofday(&end, NULL);
 	printArray<std::vector<int> >(sortedVector, "After : ");
+
 	isSorted (sortedVector);
+
+	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
 
 
 }

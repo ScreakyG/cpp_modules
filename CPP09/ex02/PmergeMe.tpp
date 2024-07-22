@@ -20,16 +20,27 @@ template <typename T>
 static void printPairs(T &array, std::string msg)
 {
 	typename T::iterator it;
+	int					 i = 0;
 
 	std::cout << PURPLE << msg;
 	for (it = array.begin(); it != array.end(); it++)
 	{
-		std::cout << "<";
-		std::cout << it->first;
-		std::cout << ",";
-		std::cout << it->second;
-		std::cout << ">";
-		std::cout << " ";
+
+		if (i <= 5)
+		{
+			std::cout << "<";
+			std::cout << it->first;
+			std::cout << ",";
+			std::cout << it->second;
+			std::cout << ">";
+			std::cout << " ";
+		}
+		else
+		{
+			std::cout << " [...]";
+			break ;
+		}
+		i++;
 	}
 	std::cout << RESET;
 	std::cout << std::endl;
