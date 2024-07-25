@@ -33,26 +33,6 @@ static std::vector<std::pair<int, int> > makePairs(std::vector<int> &array)
 	return (vectorPairs);
 }
 
-static void sortPairsBigValue(std::vector<std::pair<int, int> > &array)
-{
-	std::vector<std::pair<int, int> >::iterator	it = array.begin();
-
-	for (unsigned int step = 1; step < array.size(); step++)
-	{
-		std::pair<int, int>	key(*(it + step));
-		int		j = step - 1;
-
-		while (key.second < (it + j)->second && j >= 0)
-		{
-			(it + (j + 1))->second = (it + j)->second;
-			(it + (j + 1))->first = (it + j)->first;
-			j--;
-		}
-		(it + (j + 1))->second = key.second;
-		(it + (j + 1))->first = key.first;
-	}
-}
-
 // static std::vector<int> createJacobstahlSequence(std::vector<int> &pendChain)
 // {
 // 	std::vector<int>				jacobSequence;
@@ -82,7 +62,6 @@ static int jacobsthal(int n)
 
 static std::vector<int> createJacobsthalsSequence_COPY(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
 {
-	//std::vector<int>			jacobsthalSequence;
 	unsigned long				jacob = 0;
 
 	for (std::size_t i = 2; i < pendChain.size() + mainChain.size(); i++)
@@ -119,7 +98,6 @@ static std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &j
 
 static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
 {
-	//std::vector<int>			jacobsthalSequence;
 	std::vector<unsigned long>	jacobsthalIndexed;
 
 	createJacobsthalsSequence_COPY(pendChain, mainChain, jacobsthalSequence);
@@ -147,9 +125,7 @@ static void insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pe
 	size_t	lastSize = 0;
 	for (unsigned int i = 0; i < indexSequence.size(); i++)
 	{
-		// Decouper pour ne pas comparer avec toute la mainchain
 		// Chercher a quel batch appartiennent les nombres en fonction des index de jacobsthal.
-		// Ajouter le stragller a la fin.
 		lastSize = pow(2, getBatchNumber(jacobSequence, indexSequence[i])) - 1;
 		if (lastSize > mainChain.size())
 			lastSize = mainChain.size();
@@ -188,6 +164,61 @@ static std::vector<int> createFinalArray(std::vector<std::pair<int, int> > &arra
 	return (mainChain);
 }
 
+static void mergeVector(std::vector<std::pair<int, int> > &left, std::vector<std::pair<int, int> > &right, std::vector<std::pair<int, int> > &array)
+{
+	unsigned int	i = 0;
+	unsigned int	j = 0;
+	unsigned int	k = 0;
+
+	while (i < left.size() && j < right.size())
+	{
+		if (left[i].second <= right[j].second)
+		{
+			array[k].first = left[i].first;
+			array[k].second = left[i].second;
+			i++;
+		}
+		else
+		{
+			array[k].first = right[j].first;
+			array[k].second = right[j].second;
+			j++;
+		}
+		k++;
+	}
+	for (; i < left.size(); i++)
+	{
+		array[k].first = left[i].first;
+		array[k].second = left[i].second;
+		k++;
+	}
+	for (; j < right.size(); j++)
+	{
+		array[k].first = right[j].first;
+		array[k].second = right[j].second;
+		k++;
+	}
+}
+
+static void mergeSortVector(std::vector<std::pair<int, int> > &array)
+{
+	if (array.size() < 2)
+		return ;
+
+	unsigned int						mid = array.size() / 2;
+	std::vector<std::pair<int, int> >	left;
+	std::vector<std::pair<int, int> >	right;
+
+	for (unsigned int i = 0; i < mid; i++)
+		left.push_back(array[i]);
+	for (unsigned int i = mid; i < array.size(); i++)
+		right.push_back(array[i]);
+
+	mergeSortVector(left);
+	mergeSortVector(right);
+	mergeVector(left, right, array);
+}
+
 static std::vector<int> sortVector(std::vector<int> &array)
 {
 	int									straggler = -1;
@@ -207,7 +238,8 @@ static std::vector<int> sortVector(std::vector<int> &array)
 	sortPairsElements(vectorPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
 	printPairs(vectorPairs, "Sorting inside Pairs : ");
 
-	sortPairsBigValue(vectorPairs); // Sort pairs by compare their b values in ascending order.
+	// Sort pairs by compare their b values in ascending order.
+	mergeSortVector(vectorPairs);
 	printPairs(vectorPairs, "After sorting Pairs : ");
 
 	return (createFinalArray(vectorPairs, straggler));
