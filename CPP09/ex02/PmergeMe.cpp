@@ -261,8 +261,8 @@ std::list<int> sortList(std::list<int> &array)
 	listPairs = makePairsList(array); // Create pairs form original array's elements.
 	printPairs(listPairs, "Pairing elements : ");
 
-	//sortPairsElements(vectorPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
-	//printPairs(vectorPairs, "Sorting inside Pairs : ");
+	sortPairsElements(listPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
+	printPairs(listPairs, "Sorting inside Pairs : ");
 
 	// Sort pairs by compare their b values in ascending order.
 	//mergeSortVector(vectorPairs);
