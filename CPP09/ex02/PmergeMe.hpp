@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include <list>
 #include <cstdlib>
 #include <limits>
 #include <algorithm>

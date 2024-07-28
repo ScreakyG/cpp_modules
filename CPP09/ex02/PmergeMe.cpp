@@ -1,24 +1,24 @@
 #include "PmergeMe.hpp"
 
-static void parseArgs(char **argv, std::vector<int> &vector)
+static std::list<std::pair<int, int> > makePairsList(std::list<int> &array)
 {
-	char				*endptr;
-	long				nb;
+	std::list<std::pair<int, int> >		listPairs;
+	std::pair<int, int>					pairedElements;
 
-	if (argv == NULL || *argv == NULL)
-		throw std::runtime_error("Parsing arguments failed");
-
-	for (int i = 1; argv[i]; i++)
+	for (std::list<int>::iterator it = array.begin(); it != array.end(); it++)
 	{
-		nb = std::strtol(argv[i], &endptr, 10);
-		if (*endptr != '\0')
-			throw std::runtime_error("Unvalid number detected");
-		if (nb < 0 || nb > std::numeric_limits<int>::max())
-			throw std::runtime_error("Out of limits/negative number detected");
-		vector.push_back(static_cast<int>(nb));
-		// Ajouter le deuxieme container.
+		std::list<int>::iterator next_it = it;
+		++next_it;
+		if (next_it != array.end())
+		{
+			pairedElements = std::make_pair(*it, *next_it);
+			listPairs.push_back(pairedElements);
+		}
+		it = next_it;
 	}
+	return (listPairs);
 }
+
 
 static std::vector<std::pair<int, int> > makePairs(std::vector<int> &array)
 {
@@ -245,6 +245,33 @@ static std::vector<int> sortVector(std::vector<int> &array)
 	return (createFinalArray(vectorPairs, straggler));
 }
 
+std::list<int> sortList(std::list<int> &array)
+{
+	int									straggler = -1;
+	std::list<std::pair<int, int> >		listPairs;
+
+	if (array.size() % 2 != 0)
+	{
+		straggler = array.back();
+		array.pop_back();
+	}
+	(void)straggler;
+	// Check if list is already sorted.
+
+	listPairs = makePairsList(array); // Create pairs form original array's elements.
+	printPairs(listPairs, "Pairing elements : ");
+
+	//sortPairsElements(vectorPairs); // Sort elements in the pairs P(a1, b1), where b1 > a1.
+	//printPairs(vectorPairs, "Sorting inside Pairs : ");
+
+	// Sort pairs by compare their b values in ascending order.
+	//mergeSortVector(vectorPairs);
+	//printPairs(vectorPairs, "After sorting Pairs : ");
+
+	//return (createFinalArray(vectorPairs, straggler));
+	return (array);
+}
+
 static void isSorted(std::vector<int> &array)
 {
 	for (size_t i = 1; i < array.size(); i++)
@@ -268,7 +295,8 @@ void PmergeMe::mergeInsert(char **argv)
 	std::vector<int>	sortedVector;
 
 	gettimeofday(&start, NULL);
-	parseArgs(argv, vectorNumbers);
+	parseArgs<std::vector<int> >(argv, vectorNumbers);
+
 	printArray<std::vector<int> >(vectorNumbers, "Before : ");
 
 	sortedVector = sortVector(vectorNumbers);
@@ -281,4 +309,13 @@ void PmergeMe::mergeInsert(char **argv)
 	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
 
 
+	std::cout << BLUE << "TESTING WITH STD::LIST" << RESET << std::endl;
+
+	std::list<int>		listNumbers;
+	std::list<int>		sortedList;
+
+	parseArgs(argv, listNumbers);
+	printArray<std::list<int> >(listNumbers, "Before : ");
+
+	sortedList = sortList(listNumbers);
 }
