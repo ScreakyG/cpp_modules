@@ -266,7 +266,8 @@ std::list<int> sortList(std::list<int> &array)
 
 	// Sort pairs by compare their b values in ascending order.
 	//mergeSortVector(vectorPairs);
-	//printPairs(vectorPairs, "After sorting Pairs : ");
+	mergeSortTemplate(listPairs);
+	printPairs(listPairs, "After sorting Pairs : ");
 
 	//return (createFinalArray(vectorPairs, straggler));
 	return (array);

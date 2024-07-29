@@ -86,3 +86,64 @@ static void sortPairsElements(T &array)
 	}
 }
 
+template <typename T>
+static void mergeTemplate(T &left, T &right, T &array)
+{
+	typename T::iterator	it_left = left.begin();
+	typename T::iterator	it_right = right.begin();
+	typename T::iterator	it_og = array.begin();
+
+	while (it_left != left.end() && it_right != right.end())
+	{
+		if (it_left->second <= it_right->second)
+		{
+			it_og->first = it_left->first;
+			it_og->second = it_left->second;
+			it_left++;
+		}
+		else
+		{
+			it_og->first = it_right->first;
+			it_og->second = it_right->second;
+			it_right++;
+		}
+		it_og++;
+	}
+	for (; it_left != left.end(); it_left++)
+	{
+		it_og->first = it_left->first;
+		it_og->second = it_left->second;
+		it_og++;
+	}
+	for (; it_right != right.end(); it_right++)
+	{
+		it_og->first = it_right->first;
+		it_og->second = it_right->second;
+		it_og++;
+	}
+}
+
+template <typename T>
+static void mergeSortTemplate(T &array)
+{
+	if (array.size() < 2)
+		return ;
+
+	unsigned int			mid = array.size() / 2;
+	T	left;
+	T	right;
+
+	typename T::iterator		it;
+	typename T::iterator		it_mid = array.begin();
+
+	std::advance(it_mid, mid);
+
+	for (it = array.begin(); it != it_mid; it++)
+		left.push_back(*it);
+	for (it = it_mid; it != array.end(); it++)
+		right.push_back(*it);
+
+	mergeSortTemplate(left);
+	mergeSortTemplate(right);
+	mergeTemplate(left, right, array);
+}
