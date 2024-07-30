@@ -60,23 +60,6 @@ int jacobsthal(int n)
     return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
 }
 
-static std::vector<int> createJacobsthalsSequence_COPY(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
-{
-	unsigned long				jacob = 0;
-
-	for (std::size_t i = 2; i < pendChain.size() + mainChain.size(); i++)
-	{
-		jacob = jacobsthal(i);
-		if (jacob > pendChain.size())
-		{
-			jacobsthalSequence.push_back(jacob);
-			break ;
-		}
-		jacobsthalSequence.push_back(jacob);
-	}
-	return (jacobsthalSequence);
-}
-
 std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &jacobSequence, int size)
 {
 	std::vector<unsigned long>	jacobsthalIndexed;
@@ -93,19 +76,6 @@ std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &jacobSeq
 			jacobsthalIndexed.push_back(jacob);
 		}
 	}
-	return (jacobsthalIndexed);
-}
-
-static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendChain, std::vector<int> &mainChain, std::vector<int> &jacobsthalSequence)
-{
-	std::vector<unsigned long>	jacobsthalIndexed;
-
-	createJacobsthalsSequence_COPY(pendChain, mainChain, jacobsthalSequence);
-	printArray(jacobsthalSequence, RED "Jacob sequence : " RESET, false);
-
-	jacobsthalIndexed = createJacobIndexedSequence(jacobsthalSequence, pendChain.size());
-	printArray(jacobsthalIndexed, RED "Jacob sequence indexed : " RESET, false);
-
 	return (jacobsthalIndexed);
 }
 
@@ -144,14 +114,13 @@ static std::list<int>	createFinalList(std::list<std::pair<int, int> > &array, in
 		mainChain.push_back(it->second);
 		pendChain.push_back(it->first);
 	}
-	(void)straggler;
 	printArray(mainChain, GREEN "Main chain : " RESET, false);
 	printArray(pendChain, YELLOW "Pend chain : " RESET, false);
 
 	if (pendChain.size() > 1)
 	{
 		std::vector<int>		   jacobsthalSequence;
-		std::vector<unsigned long> indexSequence = createInsertSequence_Template(pendChain, mainChain, jacobsthalSequence); // Get the index sorting sequence.
+		std::vector<unsigned long> indexSequence = createInsertSequence(pendChain, mainChain, jacobsthalSequence); // Get the index sorting sequence.
 
 		mainChain.insert(mainChain.begin(), pendChain.front()); // Insert the first element in MainChain since a1 is smaller than b1.
 		indexSequence.erase(indexSequence.begin()); // Remove the first index since we pushed it.
@@ -285,7 +254,6 @@ std::list<int> sortList(std::list<int> &array)
 		straggler = array.back();
 		array.pop_back();
 	}
-	(void)straggler;
 	// Check if list is already sorted.
 
 	listPairs = makePairsList(array); // Create pairs form original array's elements.
@@ -300,21 +268,6 @@ std::list<int> sortList(std::list<int> &array)
 	printPairs(listPairs, "After sorting Pairs : ");
 
 	return (createFinalList(listPairs, straggler));
-}
-
-static void isSorted(std::vector<int> &array)
-{
-	if (PRINT_DETAILS == false)
-		return ;
-	for (size_t i = 1; i < array.size(); i++)
-	{
-		if (array[i] < array[i - 1])
-		{
-			std::cout << RED << "Array is not sorted" << RESET << std::endl;
-			return ;
-		}
-	}
-	std::cout << GREEN << "Array is sorted" << RESET << std::endl;
 }
 
 void PmergeMe::mergeInsert(char **argv)
@@ -335,7 +288,7 @@ void PmergeMe::mergeInsert(char **argv)
 	gettimeofday(&end, NULL);
 	printArray<std::vector<int> >(sortedVector, "After : ", true);
 
-	isSorted (sortedVector);
+	isSorted(sortedVector);
 
 	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
 	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
@@ -354,7 +307,7 @@ void PmergeMe::mergeInsert(char **argv)
 	gettimeofday(&end, NULL);
 	printArray<std::list<int> >(sortedList, "After : ", false);
 
-	isSorted_Template(sortedList);
+	isSorted(sortedList);
 
 	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
 	std::cout << "Time to process a range of " << listNumbers.size() << " elements with std::list : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;

@@ -5,7 +5,7 @@ std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &jacobSeq
 int getBatchNumber(std::vector<int> &jacobSequence, int index);
 
 template <typename T>
-static void isSorted_Template(T &array)
+static void isSorted(T &array)
 {
 	if (PRINT_DETAILS == false)
 		return ;
@@ -184,7 +184,7 @@ static void mergeSortTemplate(T &array)
 }
 
 template <typename T>
-static std::vector<int> createJacobsthalsSequence_Template(T&pendChain, T &mainChain, std::vector<int> &jacobsthalSequence)
+static std::vector<int> createJacobsthalsSequence(T&pendChain, T &mainChain, std::vector<int> &jacobsthalSequence)
 {
 	unsigned long				jacob = 0;
 
@@ -202,11 +202,11 @@ static std::vector<int> createJacobsthalsSequence_Template(T&pendChain, T &mainC
 }
 
 template <typename T>
-static std::vector<unsigned long> createInsertSequence_Template(T &pendChain, T &mainChain, std::vector<int> &jacobsthalSequence)
+static std::vector<unsigned long> createInsertSequence(T &pendChain, T &mainChain, std::vector<int> &jacobsthalSequence)
 {
 	std::vector<unsigned long> jacobsthalIndexed;
 
-	createJacobsthalsSequence_Template(pendChain, mainChain, jacobsthalSequence);
+	createJacobsthalsSequence(pendChain, mainChain, jacobsthalSequence);
 	printArray(jacobsthalSequence, RED "Jacob sequence : " RESET, false);
 
 	jacobsthalIndexed = createJacobIndexedSequence(jacobsthalSequence, pendChain.size());
