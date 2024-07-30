@@ -49,7 +49,7 @@ static std::vector<std::pair<int, int> > makePairs(std::vector<int> &array)
 // 	return (jacobSequence);
 // }
 
-static int jacobsthal(int n)
+int jacobsthal(int n)
 {
     if (n == 0)
         return 0;
@@ -77,7 +77,7 @@ static std::vector<int> createJacobsthalsSequence_COPY(std::vector<int> &pendCha
 	return (jacobsthalSequence);
 }
 
-static std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &jacobSequence, int size)
+std::vector<unsigned long> createJacobIndexedSequence(std::vector<int> &jacobSequence, int size)
 {
 	std::vector<unsigned long>	jacobsthalIndexed;
 	int							jacob = 0;
@@ -101,15 +101,15 @@ static std::vector<unsigned long> createInsertSequence(std::vector<int> &pendCha
 	std::vector<unsigned long>	jacobsthalIndexed;
 
 	createJacobsthalsSequence_COPY(pendChain, mainChain, jacobsthalSequence);
-	printArray(jacobsthalSequence, RED "Jacob sequence : " RESET);
+	printArray(jacobsthalSequence, RED "Jacob sequence : " RESET, false);
 
 	jacobsthalIndexed = createJacobIndexedSequence(jacobsthalSequence, pendChain.size());
-	printArray(jacobsthalIndexed, RED "Jacob sequence indexed : " RESET);
+	printArray(jacobsthalIndexed, RED "Jacob sequence indexed : " RESET, false);
 
 	return (jacobsthalIndexed);
 }
 
-static int getBatchNumber(std::vector<int> &jacobSequence, int index)
+int getBatchNumber(std::vector<int> &jacobSequence, int index)
 {
 
 	for (unsigned int i = 0; i < jacobSequence.size(); i++)
@@ -120,7 +120,7 @@ static int getBatchNumber(std::vector<int> &jacobSequence, int index)
 	return (-1);
 }
 
-static void insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pendChain, std::vector<int> &jacobSequence, std::vector<unsigned long> &indexSequence)
+static void   insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pendChain, std::vector<int> &jacobSequence, std::vector<unsigned long> &indexSequence)
 {
 	size_t	lastSize = 0;
 	for (unsigned int i = 0; i < indexSequence.size(); i++)
@@ -131,6 +131,37 @@ static void insertPendIntoMain(std::vector<int> &mainChain, std::vector<int> &pe
 			lastSize = mainChain.size();
 		mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.begin() + lastSize, pendChain[indexSequence[i] - 1]), pendChain[indexSequence[i] - 1]);
 	}
+}
+
+static std::list<int>	createFinalList(std::list<std::pair<int, int> > &array, int &straggler)
+{
+	std::list<std::pair<int, int> >::iterator it;
+	std::list<int> mainChain;
+	std::list<int> pendChain;
+
+	for (it = array.begin(); it != array.end(); it++) // Push bigger value of each pairs to mainChain resulting in a sorted array, and smallers to pend.
+	{
+		mainChain.push_back(it->second);
+		pendChain.push_back(it->first);
+	}
+	(void)straggler;
+	printArray(mainChain, GREEN "Main chain : " RESET, false);
+	printArray(pendChain, YELLOW "Pend chain : " RESET, false);
+
+	if (pendChain.size() > 1)
+	{
+		std::vector<int>		   jacobsthalSequence;
+		std::vector<unsigned long> indexSequence = createInsertSequence_Template(pendChain, mainChain, jacobsthalSequence); // Get the index sorting sequence.
+
+		mainChain.insert(mainChain.begin(), pendChain.front()); // Insert the first element in MainChain since a1 is smaller than b1.
+		indexSequence.erase(indexSequence.begin()); // Remove the first index since we pushed it.
+		insertPendIntoMain_Template(mainChain, pendChain, jacobsthalSequence, indexSequence);
+	}
+	else if (pendChain.size() == 1) // Will also protect if the OG array is only 1 number.
+		mainChain.insert(mainChain.begin(), pendChain.front()); // No need to get inserting sequence if only one element to insert.
+	if (straggler != -1)
+		mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), straggler), straggler);
+	return (mainChain);
 }
 
 static std::vector<int> createFinalArray(std::vector<std::pair<int, int> > &array, int &straggler)
@@ -144,9 +175,8 @@ static std::vector<int> createFinalArray(std::vector<std::pair<int, int> > &arra
 		mainChain.push_back(it->second);
 		pendChain.push_back(it->first);
 	}
-	(void)straggler;
-	printArray(mainChain, GREEN "Main chain : " RESET);
-	printArray(pendChain, YELLOW "Pend chain : " RESET);
+	printArray(mainChain, GREEN "Main chain : " RESET, false);
+	printArray(pendChain, YELLOW "Pend chain : " RESET, false);
 
 	if (pendChain.size() > 1)
 	{
@@ -269,12 +299,13 @@ std::list<int> sortList(std::list<int> &array)
 	mergeSortTemplate(listPairs);
 	printPairs(listPairs, "After sorting Pairs : ");
 
-	//return (createFinalArray(vectorPairs, straggler));
-	return (array);
+	return (createFinalList(listPairs, straggler));
 }
 
 static void isSorted(std::vector<int> &array)
 {
+	if (PRINT_DETAILS == false)
+		return ;
 	for (size_t i = 1; i < array.size(); i++)
 	{
 		if (array[i] < array[i - 1])
@@ -298,11 +329,11 @@ void PmergeMe::mergeInsert(char **argv)
 	gettimeofday(&start, NULL);
 	parseArgs<std::vector<int> >(argv, vectorNumbers);
 
-	printArray<std::vector<int> >(vectorNumbers, "Before : ");
+	printArray<std::vector<int> >(vectorNumbers, "Before : ", true);
 
 	sortedVector = sortVector(vectorNumbers);
 	gettimeofday(&end, NULL);
-	printArray<std::vector<int> >(sortedVector, "After : ");
+	printArray<std::vector<int> >(sortedVector, "After : ", true);
 
 	isSorted (sortedVector);
 
@@ -310,13 +341,21 @@ void PmergeMe::mergeInsert(char **argv)
 	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
 
 
-	std::cout << BLUE << "TESTING WITH STD::LIST" << RESET << std::endl;
+	//std::cout << BLUE << "TESTING WITH STD::LIST" << RESET << std::endl;
 
 	std::list<int>		listNumbers;
 	std::list<int>		sortedList;
 
+	gettimeofday(&start, NULL);
 	parseArgs(argv, listNumbers);
-	printArray<std::list<int> >(listNumbers, "Before : ");
+	printArray<std::list<int> >(listNumbers, "Before : ", false);
 
 	sortedList = sortList(listNumbers);
+	gettimeofday(&end, NULL);
+	printArray<std::list<int> >(sortedList, "After : ", false);
+
+	isSorted_Template(sortedList);
+
+	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+	std::cout << "Time to process a range of " << listNumbers.size() << " elements with std::list : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
 }

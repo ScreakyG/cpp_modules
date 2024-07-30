@@ -19,6 +19,8 @@
 #define PURPLE	"\e[35m"
 #define CYAN	"\e[36m"
 
+#define PRINT_DETAILS false
+
 class PmergeMe
 {
 	public:
