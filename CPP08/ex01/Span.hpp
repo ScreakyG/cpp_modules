@@ -3,6 +3,11 @@
 #include <exception>
 #include <vector>
 
+#define RESET	"\e[0m"
+#define RED	"\e[31m"
+#define GREEN	"\e[32m"
+#define YELLOW	"\e[33m"
+
 class Span
 {
 	public:

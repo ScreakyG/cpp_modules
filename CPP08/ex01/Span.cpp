@@ -5,23 +5,23 @@
 
 Span::Span(void): _array(),_maxSize(0)
 {
-	std::cout << "Span default constructor called" << std::endl;
+	std::cout << YELLOW "Span default constructor called" RESET << std::endl;
 }
 
 Span::Span(unsigned int N): _array(), _maxSize(N)
 {
-	std::cout << "Span size constructor called" << std::endl;
+	std::cout << YELLOW "Span size constructor called" RESET << std::endl;
 }
 
 Span::Span(const Span &rhs)
 {
-	std::cout << "Span copy constructor called" << std::endl;
+	std::cout << YELLOW "Span copy constructor called" RESET << std::endl;
 	*this = rhs;
 }
 
 Span& Span::operator=(const Span &rhs)
 {
-	std::cout << "Span assignement operator called" << std::endl;
+	std::cout << YELLOW "Span assignement operator called" RESET << std::endl;
 	if (this != &rhs)
 	{
 		this->_maxSize = rhs._maxSize;
@@ -32,7 +32,7 @@ Span& Span::operator=(const Span &rhs)
 
 Span::~Span()
 {
-	std::cout << "Span destructor called" << std::endl;
+	std::cout << YELLOW "Span destructor called" RESET << std::endl;
 }
 
 void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
@@ -94,11 +94,10 @@ void Span::printSpan()
 
 const char* Span::SpanIsFull::what() const throw()
 {
-	return ("Span is full");
+	return (RED "Span have not enough space" RESET);
 }
 
 const char* Span::NotEnoughNumbers::what() const throw()
 {
-	return ("Couldn't calculate distance because there is not enough numbers");
+	return (RED "Couldn't calculate distance because there is not enough numbers" RESET);
 }
-
