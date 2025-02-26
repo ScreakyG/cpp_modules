@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <iostream>
+#include <cstdlib>
 
 void addRandomRange(Span &obj, unsigned int size)
 {
@@ -9,6 +10,22 @@ void addRandomRange(Span &obj, unsigned int size)
 		temp[idx] = idx;
 	obj.addRange(temp.begin(), temp.end());
 }
+
+
+// void addRandomRange2(Span &obj, unsigned int size)
+// {
+// 	std::vector<int>	temp(size);
+//     int                 randomNbr;
+
+//     srand(time(0));
+
+// 	for (unsigned int idx = 0; idx < size; idx++)
+//     {
+//         randomNbr = rand() % 1001;
+// 		temp[idx] = randomNbr;
+//     }
+// 	obj.addRange(temp.begin(), temp.end());
+// }
 
 void subjectTest()
 {
@@ -35,9 +52,9 @@ int	main(void)
 	try
 	{
 		addRandomRange(sp, 100001);
+        // addRandomRange2(sp, 10);
         std::cout << "Shortest Span =  " <<  sp.shortestSpan() << std::endl;
         std::cout << "Longest Span = " << sp.longestSpan() << std::endl;
-        // sp.addNumber(99);
 		// sp.printSpan();
 	}
 	catch (const std::exception &e)
