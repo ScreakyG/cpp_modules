@@ -291,7 +291,9 @@ void PmergeMe::mergeInsert(char **argv)
 	isSorted(sortedVector);
 
 	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
-	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
+    //conversion en ms
+    executionTime /= 1000;
+	std::cout << "Time to process a range of " << vectorNumbers.size() << " elements with std::vector : " << std::fixed << std::setprecision(6) << executionTime << " ms" << std::endl;
 
 
 	//std::cout << BLUE << "TESTING WITH STD::LIST" << RESET << std::endl;
@@ -310,5 +312,7 @@ void PmergeMe::mergeInsert(char **argv)
 	isSorted(sortedList);
 
 	executionTime = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
-	std::cout << "Time to process a range of " << listNumbers.size() << " elements with std::list : " << std::fixed << std::setprecision(6) << executionTime << " us" << std::endl;
+    //conversion en ms
+    executionTime /= 1000;
+	std::cout << "Time to process a range of " << listNumbers.size() << " elements with std::list : " << std::fixed << std::setprecision(6) << executionTime << " ms" << std::endl;
 }
