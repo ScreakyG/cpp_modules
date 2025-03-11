@@ -41,6 +41,13 @@ static void verifyValue(std::string &value)
 		throw std::runtime_error("too large a number.");
 }
 
+static bool isBissextileYear(int &year)
+{
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+        return (true);
+    return (false);
+}
+
 static void verifyDate(std::string &date, std::map<std::string, float> &map)
 {
 	// std::tm				tm = {};
@@ -66,6 +73,16 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 			throw std::runtime_error("invalid date => " + date);
 		if (day < 1 || day > 31)
 			throw std::runtime_error("invalid date => " + date);
+        //Check if month is 30 or 31 days.
+        if (day > 30 && (month == 4 || month == 6 || month == 9 || month == 11))
+            throw std::runtime_error("invalid date => " + date);
+        if (month == 2)
+        {
+            if (isBissextileYear(year) == true && day > 29)
+                throw std::runtime_error("invalid date => " + date);
+            else if (isBissextileYear(year) == false && day > 28)
+                throw std::runtime_error("invalid date => " + date);
+        }
 		if (year < lowestDate)
 			throw std::runtime_error("no reference found, date too old");
 	}
