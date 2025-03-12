@@ -33,6 +33,8 @@ static void	performOperation(std::string &value, std::stack<double> &stack)
 			break ;
 		case '/' :
 			//verifier division par 0.
+            // if (a == 0)
+            //     throw std::runtime_error("division / 0 detected");
 			stack.push(b / a);
 			break ;
 		case '*' :

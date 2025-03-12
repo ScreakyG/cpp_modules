@@ -106,7 +106,7 @@ static std::map<std::string, float> importValues(std::ifstream &file)
 		mappedValue = line.substr(line.find(",") + 1);
 		dataBase[keyValue] = std::strtof(mappedValue.c_str(), &endptr);
 		if (*endptr != '\0')
-			std::cout << "Unvalind price detected" << std::endl;
+			std::cout << "Unvalid price detected" << std::endl;
 	}
 	// std::map<std::string, float>::iterator it;
 	// for (it = dataBase.begin(); it != dataBase.end(); it++)
@@ -196,6 +196,11 @@ void	BitcoinExchange::ImportDataBase(char *input)
 
 	std::map<std::string, float>	dataBase;
 
+    if (!input)
+    {
+        std::cerr << "Error with input file\n" << std::endl;
+        return ;
+    }
 	try
 	{
 		dataBaseCsv.open("data.csv");
