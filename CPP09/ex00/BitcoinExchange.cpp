@@ -71,6 +71,8 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 	int	year, month, day;
 	if (std::sscanf(date.c_str(), "%d-%d-%d", &year, &month, &day) == 3)
 	{
+        if (year > 5000)
+            throw std::runtime_error("invalid date => "+ date + " (out of range)");
 		if (month < 1 || month > 12)
 			throw std::runtime_error("invalid date => " + date);
 		if (day < 1 || day > 31)
