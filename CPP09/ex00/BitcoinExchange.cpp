@@ -49,6 +49,32 @@ static bool isBissextileYear(int &year)
     return (false);
 }
 
+static void verifyDateFormat(std::string &date)
+{
+    std::string year;
+    std::string month;
+    std::string day;
+    size_t      found;
+    size_t      old_found;
+
+    if (date.empty())
+        throw std::runtime_error("invalid date => " + date);
+    if (date.size() != 10)
+        throw std::runtime_error("invalid date => (not YYYY-MM-DD format) " + date);
+    found = date.find('-');
+    year = date.substr(0, found);
+    if (year.size() != 4)
+        throw std::runtime_error("invalid date => (wrong year format) " + date);
+    old_found = found;
+    found = date.find('-', found + 1);
+    month = date.substr(old_found + 1, found - old_found - 1);
+    if (month.size() != 2)
+        throw std::runtime_error("invalid date => (wrong month format) " + date);
+    day = date.substr(found + 1);
+    if (day.size() != 2)
+        throw std::runtime_error("invalid date => (wrong day format) " + date);
+}
+
 static void verifyDate(std::string &date, std::map<std::string, float> &map)
 {
 	// std::tm				tm = {};
@@ -65,12 +91,14 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 	// if (tm.tm_year + 1900 < tmDatabase.tm_year + 1900)
 	// 	throw std::runtime_error("no reference found, date too old");
 
+    int	year, month, day;
 	int	lowestDate = 0;
+
     if (map.empty() == false)
 	    std::sscanf(map.begin()->first.c_str(), "%d", &lowestDate);
-	int	year, month, day;
 	if (std::sscanf(date.c_str(), "%d-%d-%d", &year, &month, &day) == 3)
 	{
+        verifyDateFormat(date);
         if (year > 5000)
             throw std::runtime_error("invalid date => "+ date + " (out of range)");
 		if (month < 1 || month > 12)
@@ -165,6 +193,7 @@ static void	printConversion(std::map<std::string, float> &dataBase,std::string &
 		if (it == dataBase.begin())
 			throw std::runtime_error("no reference found, date too old");
 		it--;
+        // std::cout << BLUE"Reference date = " RESET << it->first << std::endl;
 		std::cout << date << " => " << bitcoinAmount << " = " << it->second * bitcoinAmount << std::endl;
 	}
 }
