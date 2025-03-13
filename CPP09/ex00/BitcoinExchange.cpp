@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <limits>
 
 BitcoinExchange::BitcoinExchange(void) {};
 BitcoinExchange::~BitcoinExchange(void) {};
@@ -65,7 +66,8 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 	// 	throw std::runtime_error("no reference found, date too old");
 
 	int	lowestDate = 0;
-	std::sscanf(map.begin()->first.c_str(), "%d", &lowestDate);
+    if (map.empty() == false)
+	    std::sscanf(map.begin()->first.c_str(), "%d", &lowestDate);
 	int	year, month, day;
 	if (std::sscanf(date.c_str(), "%d-%d-%d", &year, &month, &day) == 3)
 	{
@@ -90,28 +92,57 @@ static void verifyDate(std::string &date, std::map<std::string, float> &map)
 		throw std::runtime_error("invalid date => " + date);
 }
 
+static void addDatabase(std::map<std::string, float> &dataBase, std::string &line)
+{
+    size_t  find;
+    std::map<std::string, float> dummyDb;
+    std::string keyValue;
+    std::string mappedValue;
+    float       mappedValueConverted;
+    char        *endptr = NULL;
+
+    find = line.find(',');
+    if (find == std::string::npos)
+        throw std::runtime_error("wrong format =>  " + line);
+    keyValue = line.substr(0, find);
+    verifyDate(keyValue, dummyDb);
+    if (find + 1 >= line.size())
+        throw std::runtime_error("no value =>  " + line);
+    mappedValue = line.substr(find + 1);
+    mappedValueConverted = std::strtof(mappedValue.c_str(), &endptr);
+    if (*endptr != '\0' || mappedValueConverted > 10000000 || mappedValueConverted < 0)
+        throw std::runtime_error("value is not valid =>  " + line);
+    dataBase[keyValue] = mappedValueConverted;
+}
+
 static std::map<std::string, float> importValues(std::ifstream &file)
 {
 	std::map<std::string, float>	dataBase;
-	std::string	keyValue;
-	std::string	mappedValue;
 	std::string line;
-	char		*endptr = NULL;
 
 	while (std::getline(file, line))
 	{
 		if (line == "date,exchange_rate" || line.empty())
 			continue;
-		keyValue = line.substr(0, line.find(","));
-		mappedValue = line.substr(line.find(",") + 1);
-		dataBase[keyValue] = std::strtof(mappedValue.c_str(), &endptr);
-		if (*endptr != '\0')
-			std::cout << "Unvalid price detected" << std::endl;
+        try
+        {
+            addDatabase(dataBase, line);
+        }
+	    catch (std::exception &e)
+	    {
+		    std::cout << RED <<  "[Database]" << " : " << e.what() << RESET << std::endl;
+	    }
 	}
+
 	// std::map<std::string, float>::iterator it;
 	// for (it = dataBase.begin(); it != dataBase.end(); it++)
 	// 	std::cout << it->first << " " << it->second <<  std::endl;
 
+    if (dataBase.empty() == true)
+    {
+        file.close();
+        throw std::runtime_error("Database is empty");
+    }
 	return (dataBase);
 }
 
@@ -144,13 +175,13 @@ static void	getDateAndValue(std::string &date, std::string &value, std::string &
 	else
 	{
 		date = line.substr(0, found);
-		date = trim(date, " \t");
+		date = trim(date, " \t\r\v\f");
 		verifyDate(date, dataBase);
 
 		if (found + 1 >= line.size())
 			throw std::runtime_error("invalid value => no value.");
 		value = line.substr(found + 1);
-		value = trim(value, " \t");
+		value = trim(value, " \t\r\v\f");
 		verifyValue(value);
 	}
 }
